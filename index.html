@@ -399,7 +399,7 @@ var seq=0,lastTradeTime=null,prevTC=0;
 function updateTradeAgo(){if(!lastTradeTime){$('last-trade-ago').textContent='No trades';return}var s=Math.floor((Date.now()-lastTradeTime)/1000);$('last-trade-ago').textContent=s<60?s+'s ago':s<3600?Math.floor(s/60)+'m ago':Math.floor(s/3600)+'h ago'}
 setInterval(updateTradeAgo,5000);
 // API endpoint — change this to your backend URL when running the bot
-var API_URL = window.location.origin + '/api/state';
+var API_URL = 'https://YOUR-RAILWAY-URL.up.railway.app/api/state';
 // If hosted statically (e.g. Vercel), point to your bot server:
 // var API_URL = 'https://your-bot-server.com/api/state';
 
