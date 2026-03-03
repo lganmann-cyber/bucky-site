@@ -2,445 +2,1400 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-<title>BUCKY</title>
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#141414">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ascend Advisory — Specialized M&A Advisory</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500;600;700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Inter:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#141414;--panel:#1C1C1C;--card:#1E1E1E;
-  --border:rgba(255,255,255,0.08);--border-l:rgba(255,255,255,0.12);
-  --text:#FFFFFF;--text2:#A0A0A0;--text3:#5A5A5A;
-  --green:#22C55E;--green-s:rgba(34,197,94,0.1);
-  --red:#EF4444;--red-s:rgba(239,68,68,0.1);
-  --amber:#F59E0B;
-  --sans:'DM Sans',system-ui,-apple-system,sans-serif;
-  --mono:'JetBrains Mono',monospace;
-  --r:8px;
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: #000;
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+  overflow-x: hidden;
 }
-*{margin:0;padding:0;box-sizing:border-box}
-html{font-feature-settings:'tnum' 1;overscroll-behavior:none;-webkit-text-size-adjust:100%}
-body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh;-webkit-font-smoothing:antialiased;line-height:1.5;opacity:0;animation:fi .35s ease .05s forwards;overscroll-behavior:none;-webkit-overflow-scrolling:touch}
-@keyframes fi{to{opacity:1}}
+a { text-decoration: none; color: inherit; }
+img { display: block; max-width: 100%; }
 
-/* TOPBAR */
-.topbar{display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:56px;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;background:rgba(20,20,20,0.92);backdrop-filter:blur(12px)}
-.topbar-l{display:flex;align-items:center;gap:10px}
-.logo-name{font-family:var(--sans);font-size:15px;font-weight:700;color:var(--green);letter-spacing:1.8px}
-.logo-sep{color:var(--text3);font-weight:300;margin:0 2px}
-.logo-tag{font-size:12px;color:var(--text3);font-weight:500}
-.topbar-r{display:flex;align-items:center;gap:8px}
-.topbar-meta{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:10px;color:var(--text3);font-weight:500}
-.meta-sep{width:1px;height:14px;background:var(--border)}
-.streak-b{padding:2px 7px;border-radius:4px;font-weight:600;font-size:9px}
-.streak-b.w{background:var(--green-s);color:var(--green)}
-.streak-b.l{background:var(--red-s);color:var(--red)}
-.countdown-top{font-family:var(--mono);font-size:10px;color:var(--text3);font-weight:500}
-.countdown-top b{color:var(--text2);font-weight:600}
-.st{display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:10px;font-weight:500;color:var(--text3)}
-.st.on{color:var(--green)}
-.st-dot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:pulse 2.5s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.refresh-t{font-family:var(--mono);font-size:9px;color:var(--text3)}
-/* CTA BUTTONS */
-.btn-row{display:flex;gap:6px}
-.cta-primary{height:34px;padding:0 20px;display:inline-flex;align-items:center;border-radius:6px;font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:1px;color:#fff;background:var(--green);border:none;cursor:pointer;transition:all .15s}
-.cta-primary:hover{background:#1eab52;transform:translateY(-1px);box-shadow:0 4px 16px rgba(34,197,94,0.3)}
-.cta-secondary{height:34px;padding:0 16px;display:inline-flex;align-items:center;border-radius:6px;font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.8px;color:var(--text);background:transparent;border:1px solid var(--border-l);cursor:pointer;transition:all .15s;text-decoration:none}
-.cta-secondary:hover{border-color:var(--text2);background:rgba(255,255,255,0.04)}
-
-.wrap{max-width:1100px;margin:0 auto;padding:0 32px;position:relative;z-index:1}
-
-/* HERO */
-.hero{padding:56px 0 0}
-.hero-label{font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:2.5px;text-transform:uppercase;font-weight:500;margin-bottom:16px}
-.hero-title{font-size:44px;font-weight:700;letter-spacing:-1px;margin-bottom:16px;color:var(--text);line-height:1.08}
-.hero-desc{font-size:16px;color:var(--text2);font-weight:400;line-height:1.7;max-width:520px}
-
-/* PIPELINE — static horizontal with long connector */
-.pipe-section{padding:0}
-.pipe-label{font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:2.5px;text-transform:uppercase;font-weight:500;margin-bottom:20px}
-.pipe-track{position:relative;display:flex;align-items:flex-start}
-/* long horizontal line */
-.pipe-line{position:absolute;top:20px;left:calc(12.5%);right:calc(12.5%);height:1px;background:var(--border-l);z-index:0}
-.pipe-track .pipe-node{position:relative;z-index:1;flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 8px}
-.pipe-dot-wrap{width:40px;height:40px;border-radius:50%;border:1px solid var(--border-l);display:flex;align-items:center;justify-content:center;background:var(--bg);margin-bottom:12px}
-.pipe-dot-inner{width:10px;height:10px;border-radius:50%}
-.pipe-node-title{font-family:var(--sans);font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px}
-.pipe-node-sub{font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;font-weight:500}
-
-/* CAPITAL CARDS */
-.cap-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.cap-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:24px;transition:border-color .15s}
-.cap-card:hover{border-color:var(--border-l)}
-.cap-label{font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase;font-weight:500;margin-bottom:14px}
-.cap-val{font-family:var(--sans);font-size:28px;font-weight:700;letter-spacing:-.5px;line-height:1}
-.cap-sub{font-family:var(--mono);font-size:10px;font-weight:500;margin-top:8px;color:var(--text3)}
-.val-g{color:var(--green)}.val-r{color:var(--red)}.val-n{color:var(--text)}
-
-/* STATS ROW */
-.stats-row{display:flex;gap:24px;padding:16px 0;border-top:1px solid var(--border)}
-.stat-mini{display:flex;align-items:center;gap:6px}
-.stat-mini-label{font-size:12px;color:var(--text3);font-weight:500}
-.stat-mini-val{font-family:var(--mono);font-size:13px;font-weight:700}
-
-/* SPACING */
-.s-gap{height:48px}.s-gap-lg{height:56px}.s-line{height:1px;background:var(--border)}
-.sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-.sec-title{font-size:14px;font-weight:700;color:var(--text2);letter-spacing:-.1px}
-.sec-tag{font-family:var(--mono);font-size:10px;color:var(--text3)}
-
-/* CHART */
-.chart-box{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:24px}
-.chart-area{height:220px}
-.chart-sync{display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:9px;color:var(--text3)}
-.chart-sync-dot{width:4px;height:4px;border-radius:50%;background:var(--green);animation:pulse 2s ease-in-out infinite}
-.chart-tf{display:flex;border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
-.tf-btn{padding:6px 14px;font-family:var(--mono);font-size:9px;font-weight:600;color:var(--text3);background:transparent;border:none;border-right:1px solid var(--border);cursor:pointer;transition:all .12s}
-.tf-btn:last-child{border-right:none}
-.tf-btn.active{background:rgba(255,255,255,0.05);color:var(--text)}
-
-/* RISK */
-.risk-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.risk-item{padding:16px 18px;background:var(--panel);border:1px solid var(--border);border-radius:var(--r);display:flex;align-items:center;justify-content:space-between}
-.risk-l{font-size:12px;color:var(--text2);font-weight:500}
-.risk-v{font-family:var(--mono);font-size:12px;font-weight:600;display:flex;align-items:center;gap:8px;color:var(--text)}
-.rbar{width:48px;height:3px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden}
-.rfill{height:100%;border-radius:2px;transition:width .4s}
-.rok{background:var(--green)}.rwarn{background:var(--amber)}.rdang{background:var(--red)}
-.dot-g{width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block}
-.dot-r{width:6px;height:6px;border-radius:50%;background:var(--red);display:inline-block}
-
-/* TRADES */
-.th{display:grid;grid-template-columns:1fr 56px 56px 88px 52px;gap:8px;padding-bottom:12px;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase;font-weight:500}
-.tr{display:grid;grid-template-columns:1fr 56px 56px 88px 52px;gap:8px;align-items:center;padding:12px 0;border-bottom:1px solid var(--border)}
-.tr:last-child{border-bottom:none}
-.tr:hover{background:rgba(255,255,255,0.02)}
-.tr-mkt{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--text)}
-.tr-sub{font-family:var(--mono);font-size:9px;color:var(--text3);margin-top:2px}
-.tr-side{font-family:var(--mono);font-size:10px;font-weight:600}
-.tr-sz{font-family:var(--mono);font-size:11px;color:var(--text2);font-weight:500}
-.tr-pnl{font-family:var(--mono);font-size:11px;font-weight:700;text-align:right}
-.tr-st{font-family:var(--mono);font-size:9px;font-weight:600;text-align:center}
-.t-empty{padding:40px;font-family:var(--mono);font-size:11px;color:var(--text3);text-align:center}
-
-/* TERMINAL */
-.term{background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:20px 22px}
-.term-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-.term-dots{display:flex;gap:6px}
-.term-d{width:8px;height:8px;border-radius:50%}
-.term-scroll{max-height:140px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,0.05) transparent}
-.term-line{font-family:var(--mono);font-size:10px;line-height:1.9;color:var(--text2);white-space:pre-wrap;word-break:break-all}
-.term-ts{color:var(--text3);margin-right:8px}
-.cur{display:inline-block;width:7px;height:13px;background:var(--green);opacity:.5;animation:c .9s step-end infinite;vertical-align:middle;margin-left:2px}
-@keyframes c{0%,100%{opacity:.5}50%{opacity:0}}
-
-/* MODAL */
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(6px);z-index:200;align-items:center;justify-content:center}
-.modal-overlay.open{display:flex}
-.modal{background:var(--card);border:1px solid var(--border-l);border-radius:12px;width:420px;max-width:90vw;padding:32px;position:relative;animation:mIn .2s ease}
-@keyframes mIn{from{opacity:0;transform:scale(0.96) translateY(6px)}to{opacity:1;transform:scale(1) translateY(0)}}
-.modal-x{position:absolute;top:16px;right:16px;background:none;border:none;color:var(--text3);font-size:18px;cursor:pointer;line-height:1}
-.modal-x:hover{color:var(--text)}
-.modal-h{font-size:18px;font-weight:700;color:var(--text);margin-bottom:4px}
-.modal-p{font-size:13px;color:var(--text3);margin-bottom:24px;line-height:1.5}
-.modal-steps{display:flex;flex-direction:column;gap:14px;margin-bottom:28px}
-.modal-step{display:flex;gap:12px;align-items:flex-start}
-.modal-num{width:24px;height:24px;border-radius:6px;background:var(--green-s);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;font-weight:700;color:var(--green);flex-shrink:0}
-.modal-st{font-size:13px;color:var(--text2);font-weight:500;line-height:1.5;padding-top:2px}
-.modal-st strong{color:var(--text);font-weight:600}
-.modal-acts{display:flex;gap:10px}
-.modal-btn{flex:1;height:40px;display:flex;align-items:center;justify-content:center;border-radius:var(--r);font-size:12px;font-weight:600;text-decoration:none;transition:all .15s;cursor:pointer;border:none}
-.mbtn-p{background:var(--green);color:#fff}.mbtn-p:hover{background:#1eab52}
-.mbtn-s{background:transparent;color:var(--text2);border:1px solid var(--border-l)}.mbtn-s:hover{color:var(--text)}
-
-.foot{text-align:center;padding:32px;font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:2px}
-
-/* MOBILE */
-@media(max-width:960px){
-  .wrap{padding:0 16px}.topbar{padding:0 16px;height:auto;min-height:56px;flex-wrap:wrap;gap:8px;padding-top:10px;padding-bottom:10px}
-  .topbar-meta{display:none}
-  .hero-title{font-size:28px}
-  .pipe-track{flex-wrap:wrap;gap:20px;justify-content:center}
-  .pipe-line{display:none}
-  .pipe-track .pipe-node{flex:0 0 calc(50% - 12px)}
-  .cap-grid{grid-template-columns:1fr 1fr}
-  .risk-grid{grid-template-columns:1fr 1fr}
-  .th,.tr{grid-template-columns:1fr 56px 80px 48px}.th>:nth-child(2),.tr>:nth-child(2){display:none}
-  .btn-row{flex-wrap:wrap}
+/* ===== HEADER ===== */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 77px;
+  background: #000;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 73px;
 }
-@media(max-width:480px){
-  .topbar-l{width:100%}
-  .topbar-r{width:100%;justify-content:flex-start;flex-wrap:wrap;gap:6px}
-  .st,.refresh-t{display:none}
-  .hero{padding:32px 0 0}
-  .hero-title{font-size:24px}
-  .hero-desc{font-size:14px}
-  .pipe-track .pipe-node{flex:0 0 100%}
-  .cap-grid{grid-template-columns:1fr}
-  .risk-grid{grid-template-columns:1fr}
-  .stats-row{flex-wrap:wrap;gap:12px}
-  .cap-val{font-size:24px}
+.header-logo {
+  height: 50px;
+  width: auto;
+}
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+.header-nav a {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #fff;
+  padding: 12px 18px;
+  letter-spacing: -0.5px;
+  transition: opacity 0.2s;
+}
+.header-nav a:hover { opacity: 0.7; }
+.header-nav .team-link {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.team-dropdown-icon {
+  width: 12px;
+  height: 12px;
+  opacity: 0.6;
+}
+.btn-contact {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #fff;
+  background: #1cb3e8;
+  border: 2px solid #171717;
+  padding: 13px 32px;
+  cursor: pointer;
+  letter-spacing: -0.5px;
+  transition: background 0.2s;
+}
+.btn-contact:hover { background: #17a0d1; }
+
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 1323px;
+  background: #000;
+  overflow: hidden;
+  padding-top: 77px;
+}
+.hero-gradient {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 241px;
+  background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+  z-index: 2;
+}
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.15;
+}
+.hero-content {
+  position: relative;
+  z-index: 3;
+  padding: 146px 112px 0;
+  max-width: 928px;
+}
+.hero-title {
+  font-family: 'Roboto Slab', serif;
+  font-size: 54px;
+  font-weight: 600;
+  line-height: 70px;
+  color: #fff;
+  margin-bottom: 32px;
+  letter-spacing: -0.5px;
+}
+.hero-subtitle {
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 32px;
+  color: #d1d5dc;
+  margin-bottom: 48px;
+  letter-spacing: -0.5px;
+}
+.hero-buttons {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #1cb3e8;
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 16px 40px;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: background 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary:hover { background: #17a0d1; }
+.btn-primary .btn-icon {
+  width: 16px;
+  height: 16px;
+  filter: brightness(0) invert(1);
+}
+.btn-secondary-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.8);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.btn-secondary-link:hover { color: #fff; }
+.btn-secondary-link .btn-icon {
+  width: 16px;
+  height: 16px;
+  filter: brightness(0) invert(1);
+  opacity: 0.8;
+}
+
+/* ===== SECTORS ===== */
+.sectors-section {
+  position: relative;
+  background: #000;
+  padding: 80px 0 0;
+}
+.section-label {
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #1cb3e8;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0 106px;
+  margin-bottom: 24px;
+}
+.section-title {
+  font-family: 'Roboto Slab', serif;
+  font-size: 48px;
+  font-weight: 500;
+  color: #fff;
+  letter-spacing: -0.96px;
+  line-height: 47.5px;
+}
+.section-description {
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 25px;
+  color: #b7bdc1;
+  letter-spacing: -0.36px;
+  max-width: 799px;
+  padding: 0 106px;
+  margin-bottom: 40px;
+}
+.sectors-grid-wrapper {
+  position: relative;
+  overflow: hidden;
+  padding: 40px 0;
+}
+.sectors-grid-wrapper::before,
+.sectors-grid-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 275px;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+.sectors-grid-wrapper::before {
+  left: 0;
+  background: linear-gradient(to right, #000 6.7%, rgba(0,0,0,0.06));
+}
+.sectors-grid-wrapper::after {
+  right: 0;
+  background: linear-gradient(to left, #000 6.7%, rgba(0,0,0,0.06));
+}
+.sectors-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding-left: 21px;
+}
+.sector-card {
+  flex-shrink: 0;
+  width: 297px;
+  height: 154px;
+  border: 0.833px solid #2e3133;
+  background: linear-gradient(178deg, #2e3133 128%, #000 124%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.sector-card:hover { border-color: #1cb3e8; }
+.sector-icon {
+  width: 33px;
+  height: 33px;
+  object-fit: contain;
+}
+.sector-name {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16.67px;
+  font-weight: 300;
+  color: #fff;
+  letter-spacing: -0.33px;
+}
+.sectors-btn-row {
+  display: flex;
+  justify-content: flex-end;
+  padding: 24px 106px 0;
+}
+
+/* ===== WHY ASCEND ===== */
+.why-section {
+  position: relative;
+  background: #000;
+  padding: 128px 80px;
+}
+.why-header {
+  text-align: right;
+  padding: 0 32px;
+  margin-bottom: 16px;
+}
+.why-header .section-label {
+  text-align: right;
+}
+.why-header .section-title {
+  text-align: right;
+}
+.why-description {
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 33px;
+  color: #fff;
+  letter-spacing: -0.5px;
+  text-align: right;
+  max-width: 796px;
+  margin-left: auto;
+  padding: 0 32px;
+  margin-bottom: 48px;
+}
+.why-cards-container {
+  position: relative;
+  padding: 0 32px;
+  height: 936px;
+  overflow: hidden;
+}
+.why-card {
+  position: absolute;
+  width: 288px;
+  background: rgba(17,24,39,0.2);
+  border: 1px solid #1cb3e8;
+  border-radius: 8px;
+  padding: 31px;
+}
+.why-card-img {
+  width: 100%;
+  height: 192px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  border-radius: 4px;
+}
+.why-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.why-card-title {
+  font-family: 'Roboto Slab', serif;
+  font-size: 24px;
+  font-weight: 400;
+  color: #fff;
+  letter-spacing: -0.5px;
+  line-height: 32px;
+  margin-bottom: 16px;
+}
+.why-card-text {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 26px;
+  color: #9ca3af;
+  letter-spacing: -0.5px;
+}
+.why-explore-btn {
+  position: absolute;
+  top: 83px;
+  right: 32px;
+}
+
+/* ===== TRANSACTIONS ===== */
+.transactions-section {
+  position: relative;
+  background: #000;
+  padding: 80px 0 100px;
+}
+.transactions-header {
+  padding: 0 112px;
+  margin-bottom: 80px;
+}
+.transactions-carousel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  padding: 0 72px;
+  margin-bottom: 60px;
+}
+.transaction-card {
+  position: relative;
+  width: 415px;
+  flex-shrink: 0;
+}
+.transaction-card-bg {
+  width: 100%;
+  border-radius: 0;
+}
+.transaction-card-inner {
+  position: relative;
+  height: 355px;
+}
+.transaction-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 40px 20px;
+}
+.transaction-logo {
+  max-height: 78px;
+  max-width: 150px;
+  object-fit: contain;
+}
+.transaction-plus {
+  width: 26px;
+  height: 26px;
+  opacity: 0.5;
+}
+.transaction-label {
+  font-family: 'Roboto', sans-serif;
+  font-size: 11.7px;
+  font-weight: 400;
+  color: #929292;
+  text-align: center;
+  letter-spacing: 1.17px;
+  text-transform: uppercase;
+  margin: 8px 0;
+}
+.transaction-acquirer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 40px;
+}
+.transaction-acquirer img {
+  max-height: 60px;
+  max-width: 200px;
+  object-fit: contain;
+}
+.transaction-title {
+  font-family: 'Roboto Slab', serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff;
+  text-align: center;
+  letter-spacing: -0.5px;
+  line-height: 22px;
+  padding: 16px 20px;
+}
+.transaction-date {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #e5e7eb;
+  text-align: center;
+  letter-spacing: -0.5px;
+}
+.carousel-arrow {
+  width: 24px;
+  height: 13px;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+  flex-shrink: 0;
+}
+.carousel-arrow:hover { opacity: 1; }
+.transactions-btn-row {
+  display: flex;
+  justify-content: center;
+}
+
+/* ===== WHY ASCEND CARDS GRID — staggered layout ===== */
+.why-card:nth-child(1) {
+  left: 0;
+  top: 0;
+}
+.why-card:nth-child(2) {
+  left: calc(50% - 144px - 159px);
+  top: 74px;
+}
+.why-card:nth-child(3) {
+  left: calc(50% - 144px + 148px);
+  top: 233px;
+}
+.why-card:nth-child(4) {
+  right: 0;
+  left: auto;
+  top: 391px;
+}
+
+/* ===== INSIGHTS ===== */
+.insights-section {
+  position: relative;
+  background: #000;
+  padding: 80px 0 100px;
+}
+.insights-header {
+  padding: 0 117px;
+  margin-bottom: 48px;
+}
+.insights-subtitle {
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 22px;
+  color: #b7bdc1;
+  letter-spacing: -0.42px;
+  max-width: 550px;
+  margin-bottom: 40px;
+}
+.insights-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 0 108px;
+  margin-bottom: 60px;
+}
+.insight-card {
+  background: #000;
+  overflow: hidden;
+  cursor: pointer;
+}
+.insight-card-img {
+  width: 100%;
+  height: 212px;
+  overflow: hidden;
+  border-radius: 15px;
+  margin-bottom: 20px;
+}
+.insight-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.insight-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.insight-meta span {
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  color: #d7dadd;
+  letter-spacing: -0.3px;
+}
+.insight-dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #d7dadd;
+  flex-shrink: 0;
+}
+.insight-title {
+  font-family: 'Roboto Slab', serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: #fff;
+  letter-spacing: -0.4px;
+  line-height: 25px;
+  margin-bottom: 8px;
+}
+.insight-text {
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 20px;
+  color: #d7dadd;
+  letter-spacing: -0.3px;
+  margin-bottom: 16px;
+}
+.insight-link {
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: #1cb3e8;
+  letter-spacing: -0.3px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.insights-btn-row {
+  display: flex;
+  justify-content: center;
+}
+
+/* ===== TESTIMONIALS ===== */
+.testimonials-section {
+  position: relative;
+  background: #000;
+  padding: 80px 0 100px;
+}
+.testimonials-header {
+  padding: 0 112px;
+  margin-bottom: 48px;
+}
+.testimonials-carousel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 0 80px;
+  margin-bottom: 40px;
+  min-height: 475px;
+}
+.testimonial-card {
+  position: relative;
+  flex-shrink: 0;
+  width: 512px;
+  padding: 40px;
+}
+.testimonial-card-bg {
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  border: 1px solid #1cb3e8;
+  backdrop-filter: blur(44px);
+  background: linear-gradient(151deg, rgba(254,248,255,0.21) 1.8%, rgba(254,248,255,0) 99.7%);
+}
+.testimonial-card-inner {
+  position: relative;
+  z-index: 1;
+}
+.testimonial-card-side {
+  position: relative;
+  flex-shrink: 0;
+  width: 400px;
+  padding: 40px;
+  opacity: 0.4;
+  transform: scale(0.85);
+}
+.testimonial-card-side .testimonial-card-bg {
+  background: transparent;
+  border: none;
+  backdrop-filter: none;
+}
+.testimonial-quote-mark {
+  width: 30px;
+  height: 22px;
+  margin-bottom: 16px;
+}
+.testimonial-text {
+  font-family: 'Roboto Slab', serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff;
+  text-align: center;
+  line-height: 23px;
+  letter-spacing: -0.5px;
+  margin-bottom: 32px;
+}
+.testimonial-avatar-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+.testimonial-avatar {
+  width: 104px;
+  height: 104px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(28,179,232,0.3);
+}
+.testimonial-name {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #e0e0e0;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 4px;
+}
+.testimonial-role {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #9ca3af;
+  text-align: center;
+  letter-spacing: 0.2px;
+}
+.testimonials-nav {
+  display: flex;
+  justify-content: center;
+  gap: 380px;
+}
+
+/* ===== CONNECT ===== */
+.connect-section {
+  position: relative;
+  margin: 0 108px;
+  margin-bottom: 80px;
+}
+.connect-card {
+  position: relative;
+  border: 0.855px solid rgba(255,255,255,0.13);
+  border-radius: 34px;
+  padding: 41px 80px 60px;
+  overflow: hidden;
+  min-height: 369px;
+  background: radial-gradient(ellipse at -15% -80%, rgba(0,187,231,1), rgba(0,187,231,0.37) 50%, rgba(0,187,231,0.08));
+}
+.connect-ascend-bg {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 450px;
+  height: auto;
+  opacity: 0.5;
+  pointer-events: none;
+}
+.connect-content {
+  position: relative;
+  z-index: 1;
+  max-width: 500px;
+}
+.connect-title {
+  font-family: 'Roboto Slab', serif;
+  font-size: 48px;
+  font-weight: 500;
+  color: #fff;
+  letter-spacing: -1.44px;
+  margin-bottom: 20px;
+}
+.connect-title .gradient-text {
+  background: linear-gradient(to right, #1cb3e8, #42ceff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.connect-text {
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 25px;
+  color: #d7dadd;
+  letter-spacing: -0.36px;
+  margin-bottom: 32px;
+}
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #fff;
+  padding: 8px 13px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 13.7px;
+  font-weight: 300;
+  color: #fff;
+  letter-spacing: -0.27px;
+  text-transform: uppercase;
+  cursor: pointer;
+  background: transparent;
+  transition: background 0.2s;
+  box-shadow: inset 0 0 6.8px rgba(255,255,255,0.38);
+}
+.btn-outline:hover { background: rgba(255,255,255,0.1); }
+.btn-outline .btn-icon {
+  width: 15px;
+  height: 15px;
+  filter: brightness(0) invert(1);
+}
+.connect-tags {
+  display: flex;
+  gap: 8px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+.connect-tag {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255,255,255,0.05);
+  padding: 5px 10px;
+  border-radius: 2px;
+}
+.connect-tag-icon {
+  width: 10px;
+  height: 10px;
+  filter: brightness(0) invert(1);
+  opacity: 0.7;
+}
+.connect-tag span {
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  color: #fff;
+  letter-spacing: -0.24px;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  background: #000;
+  padding: 47px 108px 80px;
+  display: flex;
+  gap: 200px;
+}
+.footer-logo-col {
+  flex-shrink: 0;
+}
+.footer-logo {
+  height: 50px;
+  width: auto;
+  margin-bottom: 24px;
+}
+.footer-columns {
+  display: flex;
+  gap: 140px;
+}
+.footer-col-title {
+  font-family: 'Roboto Slab', serif;
+  font-size: 13.3px;
+  font-weight: 400;
+  color: #fff;
+  letter-spacing: -0.27px;
+  margin-bottom: 16px;
+}
+.footer-col-links {
+  display: flex;
+  flex-direction: column;
+  gap: 16.7px;
+}
+.footer-col-links a {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11.7px;
+  font-weight: 300;
+  color: #fff;
+  letter-spacing: -0.23px;
+  transition: opacity 0.2s;
+}
+.footer-col-links a:hover { opacity: 0.7; }
+.footer-social {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+.footer-social-icon {
+  width: 20px;
+  height: 20px;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+.footer-social-icon:hover { opacity: 1; }
+.footer-bottom {
+  padding: 24px 108px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-copyright {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: -0.2px;
+}
+.footer-legal {
+  display: flex;
+  gap: 16px;
+}
+.footer-legal a {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: -0.2px;
+  transition: opacity 0.2s;
+}
+.footer-legal a:hover { opacity: 0.7; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1200px) {
+  .header { padding: 0 32px; }
+  .hero-content { padding: 100px 60px 0; }
+  .section-header, .section-description { padding: 0 60px; }
+  .insights-grid { padding: 0 60px; }
+  .testimonials-carousel { padding: 0 40px; }
+  .connect-section { margin: 0 40px 60px; }
+  .footer { padding: 40px 60px 60px; gap: 100px; }
+}
+@media (max-width: 960px) {
+  .header-nav a { display: none; }
+  .btn-contact { display: none; }
+  .hero-title { font-size: 36px; line-height: 48px; }
+  .section-title { font-size: 36px; }
+  .insights-grid { grid-template-columns: 1fr; }
+  .why-cards-container { height: auto; }
+  .why-card { position: relative !important; top: auto !important; left: auto !important; right: auto !important; margin-bottom: 20px; width: 100%; }
+  .testimonials-carousel { flex-direction: column; }
+  .testimonial-card-side { display: none; }
+  .footer { flex-direction: column; gap: 40px; }
+  .footer-columns { gap: 60px; }
+}
+
+/* ===== TRANSACTION CARD DETAILED STYLING ===== */
+.tx-card {
+  width: 415px;
+  flex-shrink: 0;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.tx-card-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 38px 30px 10px;
+  min-height: 120px;
+}
+.tx-logo {
+  max-height: 78px;
+  max-width: 152px;
+  object-fit: contain;
+}
+.tx-plus {
+  width: 26px;
+  height: 26px;
+  opacity: 0.4;
+}
+.tx-divider-text {
+  font-family: 'Roboto', sans-serif;
+  font-size: 11.7px;
+  font-weight: 400;
+  color: #929292;
+  text-align: center;
+  letter-spacing: 1.17px;
+  text-transform: uppercase;
+  padding: 8px 0;
+  line-height: 19px;
+}
+.tx-acquirer-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 0 40px 16px;
+  min-height: 80px;
+}
+.tx-acquirer-logo {
+  max-height: 60px;
+  max-width: 180px;
+  object-fit: contain;
+}
+.tx-card-footer {
+  padding: 16px 20px 20px;
+}
+.tx-card-title {
+  font-family: 'Roboto Slab', serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff;
+  text-align: center;
+  letter-spacing: -0.5px;
+  line-height: 22px;
+  margin-bottom: 8px;
+}
+.tx-card-date {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #e5e7eb;
+  text-align: center;
+  letter-spacing: -0.5px;
 }
 </style>
 </head>
 <body>
-<div class="topbar">
-  <div class="topbar-l">
-    <span class="logo-name">BUCKY</span><span class="logo-sep">/</span><span class="logo-tag">Prediction Agent</span>
-  </div>
-  <div class="topbar-r">
-    <div class="topbar-meta">
-      <span id="session-time">0m</span>
-      <div class="meta-sep"></div>
-      <span id="streak-display">--</span>
-      <div class="meta-sep"></div>
-      <span id="last-trade-ago">No trades</span>
-      <div class="meta-sep"></div>
-      <span class="countdown-top">Next: <b id="countdown">--:--</b></span>
-      <div class="meta-sep"></div>
-      <span id="trades-today">0/50</span>
-    </div>
-    <span class="refresh-t" id="last-updated"></span>
-    <div class="st on" id="status-pill"><div class="st-dot" id="pulse-dot"></div><span id="status-text">Active</span></div>
-    <div class="btn-row">
-      <button class="cta-primary" onclick="document.getElementById('trade-modal').classList.add('open')">TRADE WITH BUCKY</button>
-      <button class="cta-secondary" onclick="document.getElementById('buy-modal').classList.add('open')">BUY $BUCKYAI</button>
-    </div>
-  </div>
-</div>
 
-<div class="wrap">
-  <div class="hero">
-    <div class="hero-label">Prediction Agent</div>
-    <div class="hero-title">Meet Bucky.</div>
-    <div class="hero-desc">Autonomous 5-minute market execution engine. Scans volatility, prices edge, and deploys capital with mathematical discipline.</div>
-  </div>
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <a href="#">
+    <img src="assets/banner-white.png" alt="Ascend Advisory" class="header-logo">
+  </a>
+  <nav class="header-nav">
+    <a href="#">Approach</a>
+    <a href="#">Sectors</a>
+    <a href="#">Transactions</a>
+    <a href="#">News &amp; Insights</a>
+    <a href="#" class="team-link">Team
+      <svg class="team-dropdown-icon" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 1.5L6 6.5L11 1.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+    <button class="btn-contact">Contact Us</button>
+  </nav>
+</header>
 
-  <div class="s-gap"></div>
-
-  <!-- PIPELINE — static nodes with connector line -->
-  <div class="pipe-section">
-    <div class="pipe-label">How Bucky Thinks</div>
-    <div class="pipe-track">
-      <div class="pipe-line"></div>
-      <div class="pipe-node">
-        <div class="pipe-dot-wrap"><div class="pipe-dot-inner" style="background:var(--green)"></div></div>
-        <div class="pipe-node-title">Scanner</div>
-        <div class="pipe-node-sub">Data Layer</div>
-      </div>
-      <div class="pipe-node">
-        <div class="pipe-dot-wrap"><div class="pipe-dot-inner" style="background:var(--text2)"></div></div>
-        <div class="pipe-node-title">Brain</div>
-        <div class="pipe-node-sub">Signal Engine</div>
-      </div>
-      <div class="pipe-node">
-        <div class="pipe-dot-wrap"><div class="pipe-dot-inner" style="background:var(--red)"></div></div>
-        <div class="pipe-node-title">Guardian</div>
-        <div class="pipe-node-sub">Risk Layer</div>
-      </div>
-      <div class="pipe-node">
-        <div class="pipe-dot-wrap"><div class="pipe-dot-inner" style="background:var(--amber)"></div></div>
-        <div class="pipe-node-title">Executor</div>
-        <div class="pipe-node-sub">Execution</div>
-      </div>
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <img src="assets/hero-bg.png" alt="" class="hero-bg">
+  <div class="hero-gradient"></div>
+  <div class="hero-content">
+    <h1 class="hero-title">Specialized M&amp;A Advisory for Software &amp; Tech-Enabled Services in Regulated Markets</h1>
+    <p class="hero-subtitle">Transforming Regulatory Complexity into Competitive Advantage</p>
+    <div class="hero-buttons">
+      <a href="#" class="btn-primary">
+        Subscribe to Insights
+        <svg class="btn-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <a href="#" class="btn-secondary-link">
+        Learn About Our Approach
+        <svg class="btn-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
     </div>
   </div>
+</section>
 
-  <div class="s-gap-lg"></div>
-
-  <!-- CAPITAL -->
-  <div class="cap-grid">
-    <div class="cap-card"><div class="cap-label">Polymarket Balance</div><div class="cap-val val-n" id="bal">$100.00</div></div>
-    <div class="cap-card"><div class="cap-label">Daily PnL</div><div class="cap-val" id="daily-pnl">$0.00</div><div class="cap-sub" id="daily-pct"></div></div>
-    <div class="cap-card"><div class="cap-label">Total PnL</div><div class="cap-val" id="total-pnl">$0.00</div><div class="cap-sub" id="total-pct"></div></div>
-    <div class="cap-card"><div class="cap-label">Open Positions</div><div class="cap-val val-n" id="open-pos">0</div></div>
-  </div>
-
-  <div class="stats-row" id="stats-row">
-    <div class="stat-mini"><span class="stat-mini-label">Wins</span><span class="stat-mini-val val-g" id="wins">0</span></div>
-    <div class="stat-mini"><span class="stat-mini-label">Losses</span><span class="stat-mini-val val-r" id="losses">0</span></div>
-    <div class="stat-mini" id="best-win-row" style="display:none"><span class="stat-mini-label">Best</span><span class="stat-mini-val val-g" id="best-win"></span></div>
-    <div class="stat-mini" id="worst-loss-row" style="display:none"><span class="stat-mini-label">Worst</span><span class="stat-mini-val val-r" id="worst-loss"></span></div>
-  </div>
-
-  <div class="s-gap-lg"></div>
-
-  <!-- EQUITY CURVE -->
-  <div class="chart-box">
-    <div class="sec-head" style="margin-bottom:14px">
-      <div style="display:flex;align-items:center;gap:16px"><span class="sec-title">Equity Curve</span><div class="chart-sync"><div class="chart-sync-dot"></div>Live</div></div>
-      <div style="display:flex;align-items:center;gap:12px"><span class="sec-tag" id="chart-range-label"></span><div class="chart-tf"><button class="tf-btn active" data-tf="all">ALL</button><button class="tf-btn" data-tf="60">1H</button><button class="tf-btn" data-tf="30">30M</button></div></div>
+<!-- ===== OUR SECTORS ===== -->
+<section class="sectors-section">
+  <div class="section-header">
+    <div>
+      <p class="section-label">Institutional Markets</p>
+      <h2 class="section-title">Our Sectors</h2>
     </div>
-    <div class="chart-area" id="chart-area"></div>
-  </div>
-
-  <div class="s-gap"></div>
-
-  <!-- RISK -->
-  <div class="sec-head"><span class="sec-title">Risk Controls</span></div>
-  <div class="risk-grid">
-    <div class="risk-item"><span class="risk-l">Can Trade</span><span class="risk-v"><span class="dot-g" id="can-trade-dot"></span></span></div>
-    <div class="risk-item"><span class="risk-l">Consec. Losses</span><span class="risk-v" id="consec-losses">0</span></div>
-    <div class="risk-item"><span class="risk-l">Daily Drawdown</span><span class="risk-v"><span id="dd-pct">0%</span><span class="rbar"><span class="rfill rok" id="dd-bar" style="width:0%"></span></span></span></div>
-    <div class="risk-item"><span class="risk-l">Trade Limit</span><span class="risk-v"><span id="trade-limit">0/50</span><span class="rbar"><span class="rfill rok" id="tl-bar" style="width:0%"></span></span></span></div>
-  </div>
-
-  <div class="s-gap"></div>
-
-  <!-- TRADES -->
-  <div class="sec-head"><span class="sec-title">Recent Trades</span><span class="sec-tag" id="trade-count">0 trades</span></div>
-  <div class="th"><div>Market</div><div>Side</div><div>Size</div><div style="text-align:right">PnL</div><div style="text-align:center">Status</div></div>
-  <div id="trades-list" style="max-height:300px;overflow-y:auto"><div class="t-empty">No trades yet</div></div>
-
-  <div class="s-gap"></div>
-  <div class="s-line"></div>
-  <div class="s-gap"></div>
-
-  <!-- TERMINAL -->
-  <div class="term">
-    <div class="term-bar"><span class="sec-title">Terminal</span><div class="term-dots"><div class="term-d" style="background:#FF5F56"></div><div class="term-d" style="background:#FFBD2E"></div><div class="term-d" style="background:#27C93F"></div></div></div>
-    <div class="term-scroll" id="log-scroll"><div class="term-line" style="color:var(--text3)">$ bucky --init<span class="cur"></span></div></div>
-  </div>
-  <div class="s-gap"></div>
-</div>
-<div class="foot">BUCKY PREDICTION AGENT</div>
-
-<div class="modal-overlay" id="trade-modal" onclick="if(event.target===this)this.classList.remove('open')">
-  <div class="modal" style="text-align:center">
-    <button class="modal-x" onclick="document.getElementById('trade-modal').classList.remove('open')">&times;</button>
-    <!-- Lock Icon -->
-    <div style="width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,0.04);border:1px solid var(--border-l);display:flex;align-items:center;justify-content:center;margin:0 auto 20px">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#A0A0A0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1"/></svg>
+    <div class="sectors-btn-row" style="padding:0">
+      <a href="#" class="btn-primary" style="height:48px;display:inline-flex;align-items:center;">EXPLORE OUR SECTORS</a>
     </div>
-    <div class="modal-h" style="font-size:20px;margin-bottom:6px">Copy Trading Locked</div>
-    <div style="font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--amber);font-weight:600;margin-bottom:24px;text-transform:uppercase">Test Period Active</div>
+  </div>
+  <p class="section-description">In regulated markets, complexity creates value friction. Success requires advisors who understand how compliance frameworks shape valuations, how government relationships influence deal dynamics, and which buyers specifically value regulatory sophistication. Ascend has established this expertise serving founders and sponsors across ten sectors where innovation meets regulation.</p>
 
-    <!-- Progress Bar -->
-    <div style="margin-bottom:24px">
-      <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-family:var(--mono);font-size:11px"><span style="color:var(--text2)">Progress to live</span><span style="color:var(--text);font-weight:700">13 / 20</span></div>
-      <div style="height:6px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden"><div style="width:65%;height:100%;background:var(--green);border-radius:3px;transition:width .5s"></div></div>
-      <div style="font-family:var(--mono);font-size:9px;color:var(--text3);margin-top:6px;text-align:right">7 test periods remaining</div>
-    </div>
-
-    <!-- Stats Grid -->
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:24px">
-      <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:14px 10px">
-        <div style="font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:1px;margin-bottom:6px;text-transform:uppercase">Win Rate</div>
-        <div style="font-family:var(--sans);font-size:22px;font-weight:700;color:var(--green)">79.81%</div>
+  <div class="sectors-grid-wrapper">
+    <!-- Row 1 -->
+    <div class="sectors-row">
+      <div class="sector-card">
+        <img src="assets/sector-gov.png" alt="" class="sector-icon">
+        <span class="sector-name">Government Technology</span>
       </div>
-      <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:14px 10px">
-        <div style="font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:1px;margin-bottom:6px;text-transform:uppercase">Total Profit</div>
-        <div style="font-family:var(--sans);font-size:22px;font-weight:700;color:var(--green)">$676.32</div>
+      <div class="sector-card">
+        <img src="assets/sector-cyber.png" alt="" class="sector-icon">
+        <span class="sector-name">Cybersecurity &amp; GRC</span>
       </div>
-      <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:14px 10px">
-        <div style="font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:1px;margin-bottom:6px;text-transform:uppercase">Tests Done</div>
-        <div style="font-family:var(--sans);font-size:22px;font-weight:700;color:var(--text)">13</div>
+      <div class="sector-card">
+        <img src="assets/sector-legal.png" alt="" class="sector-icon">
+        <span class="sector-name">Legal Technology</span>
+      </div>
+      <div class="sector-card">
+        <img src="assets/sector-fintech.png" alt="" class="sector-icon">
+        <span class="sector-name">Financial Technology</span>
+      </div>
+      <div class="sector-card">
+        <img src="assets/sector-infra.png" alt="" class="sector-icon">
+        <span class="sector-name">Infrastructure Technology</span>
       </div>
     </div>
-
-    <!-- Explanation -->
-    <div style="font-size:13px;color:var(--text2);line-height:1.65;text-align:left;margin-bottom:24px;padding:16px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:8px">Bucky is running paper trades to validate its strategy. Every <strong style="color:var(--text)">5 hours</strong> a test period completes and results are uploaded here automatically. Once <strong style="color:var(--text)">20/20 test periods</strong> are complete, copy trading will go live — your trades will mirror Bucky's in real time via PolyCop.</div>
-
-    <div class="modal-acts" style="justify-content:center">
-      <button class="modal-btn mbtn-s" onclick="document.getElementById('trade-modal').classList.remove('open')" style="flex:none;padding:0 32px">Got it</button>
+    <!-- Row 2 -->
+    <div class="sectors-row" style="padding-left: -114px; margin-left: -114px;">
+      <div class="sector-card">
+        <img src="assets/sector-k12.png" alt="" class="sector-icon">
+        <span class="sector-name">K-12 Education Technology</span>
+      </div>
+      <div class="sector-card">
+        <img src="assets/sector-util.png" alt="" class="sector-icon">
+        <span class="sector-name">Utilities Technology</span>
+      </div>
+      <div class="sector-card">
+        <img src="assets/sector-construction.png" alt="" class="sector-icon">
+        <span class="sector-name">Construction Technology</span>
+      </div>
+      <div class="sector-card">
+        <img src="assets/sector-proptech.png" alt="" class="sector-icon">
+        <span class="sector-name">Property Technology</span>
+      </div>
+      <div class="sector-card">
+        <img src="assets/sector-supply.png" alt="" class="sector-icon">
+        <span class="sector-name">Supply Chain Technology</span>
+      </div>
     </div>
   </div>
-</div>
+</section>
 
-<div class="modal-overlay" id="buy-modal" onclick="if(event.target===this)this.classList.remove('open')">
-  <div class="modal">
-    <button class="modal-x" onclick="document.getElementById('buy-modal').classList.remove('open')">&times;</button>
-    <div class="modal-h">Buy $BUCKYAI</div>
-    <div class="modal-p">Get the $BUCKYAI token on Solana in three simple steps.</div>
-    <div class="modal-steps">
-      <div class="modal-step"><div class="modal-num">1</div><div class="modal-st">Click the <strong>link below</strong> to open the token page</div></div>
-      <div class="modal-step"><div class="modal-num">2</div><div class="modal-st">Connect your <strong>Solana wallet</strong> via Phantom</div></div>
-      <div class="modal-step"><div class="modal-num">3</div><div class="modal-st">Swap SOL for <strong>$BUCKYAI</strong> and confirm the transaction</div></div>
-    </div>
-    <div class="modal-acts">
-      <a class="modal-btn mbtn-p" href="https://jup.ag" target="_blank">BUY $BUCKYAI</a>
-      <button class="modal-btn mbtn-s" onclick="document.getElementById('buy-modal').classList.remove('open')">Close</button>
-    </div>
-    <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border);font-size:10px;color:var(--text3);line-height:1.6">Disclaimer: The development team holds no token supply. Revenue is generated solely through platform fees, which are used exclusively for hosting and business expenses.</div>
+<!-- ===== WHY ASCEND STANDS APART ===== -->
+<section class="why-section">
+  <div class="why-header">
+    <p class="section-label">DIFFERENTIATORS</p>
+    <h2 class="section-title">Why Ascend Stands Apart</h2>
   </div>
-</div>
+  <p class="why-description">Operating in these markets requires more than familiarity — it demands advisors who've closed transactions in your specific regulatory environment, understand which buyers value your compliance infrastructure, and bring senior-level intensity to every engagement. In regulated markets, complexity creates value friction. Specialized advisors know how to resolve it and position it as competitive advantage.</p>
 
-<script>
-var $=function(id){return document.getElementById(id)};
-function fmt(n){return (n<0?'-':(n>0?'+':''))+'$'+Math.abs(n).toFixed(2)}
-function fmtBal(n){return '$'+n.toFixed(2)}
-var startTime=Date.now();
-function updateSession(){var m=Math.floor((Date.now()-startTime)/60000);$('session-time').textContent=m<60?m+'m':Math.floor(m/60)+'h '+m%60+'m'}
-setInterval(updateSession,30000);updateSession();
-function updateCountdown(){var now=new Date(),s=now.getSeconds(),m=now.getMinutes(),next=Math.ceil((m+1)/5)*5,rem=(next-m-1)*60+(60-s),mm=Math.floor(rem/60),ss=rem%60;$('countdown').textContent=(mm<10?'0':'')+mm+':'+(ss<10?'0':'')+ss}
-setInterval(updateCountdown,1000);updateCountdown();
-var chartTF='all';
-document.querySelectorAll('.tf-btn').forEach(function(b){b.addEventListener('click',function(){document.querySelectorAll('.tf-btn').forEach(function(x){x.classList.remove('active')});b.classList.add('active');chartTF=b.dataset.tf})});
-function drawChart(data){
-  var el=$('chart-area');if(!data||data.length<2){el.innerHTML='';return}
-  var v=data.map(function(d){return d.equity});
-  if(chartTF!=='all'){v=v.slice(-Math.min(parseInt(chartTF),v.length))}
-  if(v.length<2){el.innerHTML='';return}
-  var mn=Math.min.apply(null,v),mx=Math.max.apply(null,v),rng=mx-mn||1;
-  var W=980,H=200,pt=10,pb=10,pl=48,pr=40,cw=W-pl-pr,ch=H-pt-pb;
-  var grid='';
-  for(var i=0;i<=4;i++){var y=pt+(ch/4)*i,val=(mx-((mx-mn)/4)*i).toFixed(0);grid+='<line x1="'+pl+'" y1="'+y+'" x2="'+(W-pr)+'" y2="'+y+'" stroke="rgba(255,255,255,0.05)" stroke-width="1"/><text x="'+(pl-8)+'" y="'+(y+3)+'" fill="rgba(255,255,255,0.2)" font-family="var(--mono)" font-size="9" text-anchor="end" font-weight="500">$'+val+'</text>'}
-  var pts=v.map(function(val,idx){return (pl+((idx/(v.length-1))*cw))+','+(pt+ch-((val-mn)/rng)*ch)}).join(' ');
-  var c='rgba(255,255,255,0.6)',lx=pl+cw,ly=pt+ch-((v[v.length-1]-mn)/rng)*ch;
-  var ec=v[v.length-1]>=v[0]?'var(--green)':'var(--red)';
-  el.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" style="display:block"><defs><linearGradient id="af" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="white" stop-opacity="0.04"/><stop offset="100%" stop-color="white" stop-opacity="0"/></linearGradient></defs>'+grid+'<polygon points="'+pl+','+(pt+ch)+' '+pts+' '+lx+','+(pt+ch)+'" fill="url(#af)"/><polyline points="'+pts+'" fill="none" stroke="'+c+'" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/><text x="'+(lx+6)+'" y="'+(ly+4)+'" fill="'+ec+'" font-family="var(--mono)" font-size="10" font-weight="700">$'+v[v.length-1].toFixed(0)+'</text><circle cx="'+lx+'" cy="'+ly+'" r="3" fill="'+c+'" stroke="var(--card)" stroke-width="1.5"><animate attributeName="opacity" values="1;.3;1" dur="2s" repeatCount="indefinite"/></circle></svg>';
-  $('chart-range-label').textContent='$'+v[0].toFixed(0)+' \\u2192 $'+v[v.length-1].toFixed(0);
-}
-var seq=0,lastTradeTime=null,prevTC=0;
-function updateTradeAgo(){if(!lastTradeTime){$('last-trade-ago').textContent='No trades';return}var s=Math.floor((Date.now()-lastTradeTime)/1000);$('last-trade-ago').textContent=s<60?s+'s ago':s<3600?Math.floor(s/60)+'m ago':Math.floor(s/3600)+'h ago'}
-setInterval(updateTradeAgo,5000);
-// API endpoint — change this to your backend URL when running the bot
-var API_URL = 'https://YOUR-RAILWAY-URL.up.railway.app/api/state';
-// If hosted statically (e.g. Vercel), point to your bot server:
-// var API_URL = 'https://your-bot-server.com/api/state';
+  <div style="position:relative; padding: 0 32px;">
+    <a href="#" class="btn-primary why-explore-btn" style="position:absolute;top:0;right:32px;height:48px;display:inline-flex;align-items:center;">EXPLORE OUR APPROACH</a>
+  </div>
 
-async function refresh(){
-  try{
-    var s=await(await fetch(API_URL)).json();
-    if(s.running){$('status-pill').className='st on';$('status-text').textContent='Active';$('pulse-dot').style.display=''}
-    else{$('status-pill').className='st';$('status-text').textContent='Idle';$('pulse-dot').style.display='none'}
-    $('bal').textContent=fmtBal(s.bankroll);
-    var dp=s.daily_pnl||0,ib=s.initial_bankroll||100;
-    $('daily-pnl').textContent=fmt(dp);$('daily-pnl').className='cap-val '+(dp>0?'val-g':dp<0?'val-r':'val-n');
-    $('daily-pct').innerHTML=dp!==0?'<span style="color:'+(dp>=0?'var(--green)':'var(--red)')+'">'+(dp>=0?'+':'')+(dp/ib*100).toFixed(1)+'%</span>':'';
-    var tp=s.total_pnl||0;
-    $('total-pnl').textContent=fmt(tp);$('total-pnl').className='cap-val '+(tp>0?'val-g':tp<0?'val-r':'val-n');
-    $('total-pct').innerHTML=tp!==0?'<span style="color:'+(tp>=0?'var(--green)':'var(--red)')+'">'+(tp>=0?'+':'')+(tp/ib*100).toFixed(1)+'%</span>':'';
-    $('open-pos').textContent=s.open_positions||0;
-    $('wins').textContent=s.wins;$('losses').textContent=s.losses;
-    var trades=s.trades||[],bw=0,wl=0;
-    trades.forEach(function(t){if(t.pnl>0&&t.pnl>bw)bw=t.pnl;if(t.pnl<0&&Math.abs(t.pnl)>wl)wl=Math.abs(t.pnl)});
-    if(bw>0){$('best-win').textContent='+$'+bw.toFixed(2);$('best-win-row').style.display='flex'}
-    if(wl>0){$('worst-loss').textContent='-$'+wl.toFixed(2);$('worst-loss-row').style.display='flex'}
-    var tot=s.wins+s.losses;
-    var sd=$('streak-display');
-    if(tot>0){var cs=0,lr=trades[trades.length-1].result;for(var i=trades.length-1;i>=0;i--){if(trades[i].result===lr)cs++;else break}sd.innerHTML='<span class="streak-b '+(lr==='WIN'?'w':'l')+'">'+cs+(lr==='WIN'?' W':' L')+'</span>'}else sd.textContent='--';
-    $('trades-today').textContent=s.bets_today+'/'+s.max_daily_bets;
-    if(trades.length>prevTC&&prevTC>0)lastTradeTime=Date.now();prevTC=trades.length;updateTradeAgo();
-    $('trade-count').textContent=trades.length+' trades';
-    var tlist=$('trades-list');
-    if(trades.length>0){tlist.innerHTML=trades.slice(-12).reverse().map(function(t){var isY=t.side==='YES'||t.side==='UP',isW=t.result==='WIN';seq++;return '<div class="tr"><div><div class="tr-mkt">KXBTC5M '+t.side+' ['+seq+']</div><div class="tr-sub">'+t.time+'</div></div><div class="tr-side" style="color:'+(isY?'var(--green)':'var(--red)')+'">'+t.side+'</div><div class="tr-sz">$'+Math.abs(t.pnl).toFixed(0)+'</div><div class="tr-pnl" style="color:'+(isW?'var(--green)':'var(--red)')+'">'+(isW?'+':'-')+'$'+Math.abs(t.pnl).toFixed(2)+'</div><div class="tr-st" style="color:'+(isW?'var(--green)':'var(--red)')+'">'+t.result+'</div></div>'}).join('')}
-    var cl=Math.min(s.losses,5);$('consec-losses').textContent=cl;
-    var dd=ib>0?Math.max(0,-s.daily_pnl/ib*100):0;$('dd-pct').textContent=dd.toFixed(0)+'%';var ddb=$('dd-bar');ddb.style.width=Math.min(dd,100)+'%';ddb.className='rfill '+(dd>60?'rdang':dd>30?'rwarn':'rok');
-    $('trade-limit').textContent=s.bets_today+'/'+s.max_daily_bets;var tlP=s.max_daily_bets>0?(s.bets_today/s.max_daily_bets*100):0;var tlb=$('tl-bar');tlb.style.width=Math.min(tlP,100)+'%';tlb.className='rfill '+(tlP>80?'rdang':tlP>50?'rwarn':'rok');
-    $('can-trade-dot').className=(dd<100&&s.bets_today<s.max_daily_bets)?'dot-g':'dot-r';
-    var lg=$('log-scroll');
-    if(s.log_lines&&s.log_lines.length>0){var now=new Date().toLocaleTimeString('en-US',{hour12:false,hour:'2-digit',minute:'2-digit',second:'2-digit'});lg.innerHTML=s.log_lines.slice(-16).map(function(l){var txt=l.text.replace(/</g,'&lt;');if(/win|profit|\\+\\$/i.test(txt))txt='<span style="color:var(--green)">'+txt+'</span>';else if(/loss|lost|-\\$/i.test(txt))txt='<span style="color:var(--red)">'+txt+'</span>';return '<div class="term-line"><span class="term-ts">'+l.time+'</span>'+txt+'</div>'}).join('')+'<div class="term-line"><span class="term-ts">'+now+'</span><span class="cur"></span></div>';lg.scrollTop=lg.scrollHeight}
-    drawChart(s.equity_curve);
-    $('last-updated').textContent='Updated '+new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',second:'2-digit'});
-  }catch(e){}
-}
-setInterval(refresh,2000);refresh();
-document.addEventListener('keydown',function(e){if(e.key==='Escape'){document.getElementById('trade-modal').classList.remove('open');document.getElementById('buy-modal').classList.remove('open')}});
-</script>
+  <div class="why-cards-container">
+    <!-- Card 1: Deep Sector Expertise -->
+    <div class="why-card" style="left:0; top:0;">
+      <div class="why-card-img">
+        <img src="assets/photo-6.png" alt="Deep Sector Expertise">
+      </div>
+      <h3 class="why-card-title">Deep Sector Expertise</h3>
+      <p class="why-card-text">Closed transactions across Software and Technology with buyers who value regulatory sophistication and compliance expertise.</p>
+    </div>
+
+    <!-- Card 2: Senior Partner Commitment -->
+    <div class="why-card" style="left: calc(50% - 303px); top: 74px;">
+      <div class="why-card-img">
+        <img src="assets/photo-2.png" alt="Senior Partner Commitment">
+      </div>
+      <h3 class="why-card-title">Senior Partner<br>Commitment</h3>
+      <p class="why-card-text">Direct partner involvement from experienced bankers who've closed deals in your vertical. Meticulous attention regardless of transaction size.</p>
+    </div>
+
+    <!-- Card 3: Relationship-First Partnership -->
+    <div class="why-card" style="left: calc(50% + 4px); top: 233px;">
+      <div class="why-card-img">
+        <img src="assets/photo-3.png" alt="Relationship-First Partnership">
+      </div>
+      <h3 class="why-card-title">Relationship-First<br>Partnership</h3>
+      <p class="why-card-text">Treating your transaction as stewardship of a critical outcome, not playbook execution. High-touch guidance shapes positioning, buyer qualification, and negotiations.</p>
+    </div>
+
+    <!-- Card 4: Tailored Process & Analytical Depth -->
+    <div class="why-card" style="left: auto; right: 0; top: 391px;">
+      <div class="why-card-img">
+        <img src="assets/photo-5.png" alt="Tailored Process &amp; Analytical Depth">
+      </div>
+      <h3 class="why-card-title">Tailored Process<br>&amp; Analytical Depth</h3>
+      <p class="why-card-text">Bespoke positioning designed for your regulatory environment. Exhaustive analytical rigor ensures your business withstands scrutiny and commands premium valuations.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== RECENT TRANSACTIONS ===== -->
+<section class="transactions-section">
+  <div class="transactions-header">
+    <p class="section-label">MAKING MOVES</p>
+    <h2 class="section-title">Recent Transactions</h2>
+  </div>
+
+  <div class="transactions-carousel">
+    <!-- Left Arrow -->
+    <div style="cursor:pointer;padding:8px;">
+      <svg width="24" height="13" viewBox="0 0 24 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M24 6.5H2M2 6.5L8 1M2 6.5L8 12" stroke="white" stroke-opacity="0.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <!-- Transaction Card 1 -->
+    <div class="tx-card">
+      <div class="tx-card-logos">
+        <img src="assets/kaseware-logo.png" alt="Kaseware" class="tx-logo" style="max-width:152px;max-height:60px;">
+      </div>
+      <p class="tx-divider-text">RECEIVED A STRATEGIC<br>INVESTMENT FROM</p>
+      <div class="tx-acquirer-logos">
+        <img src="assets/fidelity-logo.png" alt="Fidelity" class="tx-acquirer-logo">
+      </div>
+      <div class="tx-card-footer" style="display:none;"></div>
+    </div>
+
+    <!-- Transaction Card 2 (Center / Featured) -->
+    <div class="tx-card" style="border-color: rgba(28,179,232,0.3);">
+      <div class="tx-card-logos">
+        <img src="assets/kaseware-logo.png" alt="Kaseware" class="tx-logo" style="max-width:200px;max-height:78px;">
+      </div>
+      <p class="tx-divider-text">HAS BEEN ACQUIRED BY</p>
+      <div class="tx-acquirer-logos">
+        <img src="assets/fidelity-logo.png" alt="Fidelity" class="tx-acquirer-logo" style="max-width:114px;">
+        <img src="assets/plus-icon.png" alt="+" class="tx-plus">
+        <img src="assets/oaktree-logo.png" alt="OakTree" class="tx-acquirer-logo" style="max-width:130px;">
+      </div>
+      <div class="tx-card-footer">
+        <p class="tx-card-title">Regional Healthcare Network Acquisition</p>
+        <p class="tx-card-date">January 2025 &bull; Healthcare Services</p>
+      </div>
+    </div>
+
+    <!-- Transaction Card 3 -->
+    <div class="tx-card">
+      <div class="tx-card-logos">
+        <img src="assets/kaseware-logo.png" alt="Kaseware" class="tx-logo" style="max-width:152px;max-height:72px;">
+      </div>
+      <p class="tx-divider-text">ACQUIRED BY</p>
+      <div class="tx-acquirer-logos">
+        <img src="assets/fidelity-logo.png" alt="Fidelity" class="tx-acquirer-logo">
+      </div>
+      <div class="tx-card-footer" style="display:none;"></div>
+    </div>
+
+    <!-- Right Arrow -->
+    <div style="cursor:pointer;padding:8px;">
+      <svg width="24" height="13" viewBox="0 0 24 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 6.5H22M22 6.5L16 1M22 6.5L16 12" stroke="white" stroke-opacity="0.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="transactions-btn-row">
+    <a href="#" class="btn-primary" style="height:48px;display:inline-flex;align-items:center;">EXPLORE  OUR TRANSACTIONS</a>
+  </div>
+</section>
+
+<!-- ===== RECENT INSIGHTS & NEWS ===== -->
+<section class="insights-section">
+  <div class="insights-header">
+    <p class="section-label">BLOG</p>
+    <h2 class="section-title">Recent Insights &amp; News</h2>
+    <p class="insights-subtitle" style="margin-top:16px;">Insights on regulated technology M&amp;A and updates from our team</p>
+  </div>
+
+  <div class="insights-grid">
+    <!-- Insight Card 1 -->
+    <div class="insight-card">
+      <div class="insight-card-img">
+        <img src="assets/photo-5.png" alt="M&amp;A in Regulated Industries">
+      </div>
+      <div class="insight-meta">
+        <span>MARKETING INSIGHTS</span>
+        <div class="insight-dot"></div>
+        <span>Feb 1, 2025</span>
+      </div>
+      <h3 class="insight-title">Navigating M&amp;A in Regulated Industries: 2025 Outlook</h3>
+      <p class="insight-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et</p>
+      <a href="#" class="insight-link">READ ARTICLE</a>
+    </div>
+
+    <!-- Insight Card 2 -->
+    <div class="insight-card">
+      <div class="insight-card-img">
+        <img src="assets/photo-6.png" alt="M&amp;A in Regulated Industries">
+      </div>
+      <div class="insight-meta">
+        <span>MARKETING INSIGHTS</span>
+        <div class="insight-dot"></div>
+        <span>Feb 1, 2025</span>
+      </div>
+      <h3 class="insight-title">Navigating M&amp;A in Regulated Industries: 2025 Outlook</h3>
+      <p class="insight-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et</p>
+      <a href="#" class="insight-link">READ ARTICLE</a>
+    </div>
+
+    <!-- Insight Card 3 -->
+    <div class="insight-card">
+      <div class="insight-card-img">
+        <img src="assets/photo-3.png" alt="M&amp;A in Regulated Industries">
+      </div>
+      <div class="insight-meta">
+        <span>MARKETING INSIGHTS</span>
+        <div class="insight-dot"></div>
+        <span>Feb 1, 2025</span>
+      </div>
+      <h3 class="insight-title">Navigating M&amp;A in Regulated Industries: 2025 Outlook</h3>
+      <p class="insight-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et</p>
+      <a href="#" class="insight-link">READ ARTICLE</a>
+    </div>
+  </div>
+
+  <div class="insights-btn-row">
+    <a href="#" class="btn-primary" style="height:48px;display:inline-flex;align-items:center;">EXPLORE ALL INSIGHTS</a>
+  </div>
+</section>
+
+<!-- ===== WORKING WITH ASCEND (TESTIMONIALS) ===== -->
+<section class="testimonials-section">
+  <div class="testimonials-header">
+    <p class="section-label">TESTIMONIALS</p>
+    <h2 class="section-title">Working With Ascend</h2>
+  </div>
+
+  <div class="testimonials-carousel">
+    <!-- Side Card Left -->
+    <div class="testimonial-card-side">
+      <div class="testimonial-card-bg"></div>
+      <div class="testimonial-card-inner" style="text-align:center;">
+        <img src="assets/quote-mark.png" alt="" class="testimonial-quote-mark" style="margin:0 auto 16px;">
+        <p class="testimonial-text" style="font-size:12px;line-height:18px;">&ldquo;Ascend understood our regulatory environment better than any other capital provider we met. They didn't just invest—they became strategic partners in navigating FDA approval.&rdquo;</p>
+        <div class="testimonial-avatar-container">
+          <img src="assets/avatar-2.png" alt="John Smith" class="testimonial-avatar" style="width:84px;height:84px;">
+        </div>
+        <p class="testimonial-name">john smith</p>
+        <p class="testimonial-role">CEO, DIGITAL THERAPEUTICS COMPANY</p>
+      </div>
+    </div>
+
+    <!-- Center Card (Featured) -->
+    <div class="testimonial-card">
+      <div class="testimonial-card-bg"></div>
+      <div class="testimonial-card-inner" style="text-align:center;">
+        <img src="assets/quote-mark-3.png" alt="" class="testimonial-quote-mark" style="margin:0 auto 16px;">
+        <p class="testimonial-text">&ldquo;Ascend understood our regulatory environment better than any other capital provider we met. They didn't just invest—they became strategic partners in navigating FDA approval.&rdquo;</p>
+        <div class="testimonial-avatar-container">
+          <img src="assets/avatar-5.png" alt="Tim Godwin" class="testimonial-avatar">
+        </div>
+        <p class="testimonial-name">Tim Godwin</p>
+        <p class="testimonial-role">CEO, DIGITAL THERAPEUTICS COMPANY</p>
+      </div>
+    </div>
+
+    <!-- Side Card Right -->
+    <div class="testimonial-card-side">
+      <div class="testimonial-card-bg"></div>
+      <div class="testimonial-card-inner" style="text-align:center;">
+        <img src="assets/quote-mark-2.png" alt="" class="testimonial-quote-mark" style="margin:0 auto 16px;">
+        <p class="testimonial-text" style="font-size:12px;line-height:18px;">&ldquo;Ascend understood our regulatory environment better than any other capital provider we met. They didn't just invest—they became strategic partners in navigating FDA approval.&rdquo;</p>
+        <div class="testimonial-avatar-container">
+          <img src="assets/avatar-3.png" alt="Donny Barstow" class="testimonial-avatar" style="width:84px;height:84px;">
+        </div>
+        <p class="testimonial-name">Donny Barstow</p>
+        <p class="testimonial-role">CEO, DIGITAL THERAPEUTICS COMPANY</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="testimonials-nav">
+    <div style="cursor:pointer;padding:8px;">
+      <svg width="24" height="11" viewBox="0 0 24 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M24 5.5H2M2 5.5L7 1M2 5.5L7 10" stroke="white" stroke-opacity="0.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div style="cursor:pointer;padding:8px;">
+      <svg width="24" height="11" viewBox="0 0 24 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 5.5H22M22 5.5L17 1M22 5.5L17 10" stroke="white" stroke-opacity="0.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONNECT WITH ASCEND ===== -->
+<section class="connect-section">
+  <div class="connect-card">
+    <img src="assets/ascend-gradient.png" alt="" class="connect-ascend-bg">
+    <div class="connect-content">
+      <h2 class="connect-title">Connect With <span class="gradient-text">Ascend</span></h2>
+      <p class="connect-text">We understand the significance of the decision you're facing. Reach out to discuss your transaction, explore how we can help, or gain perspective on your market.</p>
+      <a href="#" class="btn-outline">
+        CONTACT OUR TEAM
+        <svg class="btn-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <div class="connect-tags">
+        <div class="connect-tag">
+          <img src="assets/tag-icon-1.png" alt="" class="connect-tag-icon">
+          <span>Buy-Side Deals</span>
+        </div>
+        <div class="connect-tag">
+          <img src="assets/tag-icon-2.png" alt="" class="connect-tag-icon">
+          <span>Data-Driven</span>
+        </div>
+        <div class="connect-tag">
+          <img src="assets/tag-icon-3.png" alt="" class="connect-tag-icon">
+          <span>Strategic Growth</span>
+        </div>
+        <div class="connect-tag">
+          <img src="assets/tag-icon-4.png" alt="" class="connect-tag-icon">
+          <span>Deal Execution</span>
+        </div>
+        <div class="connect-tag">
+          <img src="assets/tag-icon-5.png" alt="" class="connect-tag-icon">
+          <span>Value Creation</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer">
+    <div class="footer-logo-col">
+      <img src="assets/banner-white.png" alt="Ascend Advisory" class="footer-logo">
+    </div>
+    <div class="footer-columns">
+      <div>
+        <p class="footer-col-title">Company</p>
+        <div class="footer-col-links">
+          <a href="#">About</a>
+          <a href="#">Approach</a>
+          <a href="#">Sectors</a>
+          <a href="#">Transactions</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer-col-title">Resources</p>
+        <div class="footer-col-links">
+          <a href="#">News &amp; Insights</a>
+          <a href="#">Team</a>
+          <a href="#">Contact Us</a>
+          <a href="#">Careers</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer-col-title">Legal</p>
+        <div class="footer-col-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copyright">&copy; 2025 Ascend Advisory. All rights reserved.</span>
+    <div class="footer-legal">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>
