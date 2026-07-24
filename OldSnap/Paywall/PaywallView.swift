@@ -27,13 +27,13 @@ struct PaywallView: View {
                     Image(uiImage: heroImage)
                         .resizable().scaledToFit()
                         .frame(maxHeight: 260)
-                        .overlay(Rectangle().stroke(OSColor.ink.opacity(0.2), lineWidth: 1))
+                        .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
                         .padding(.horizontal, 40)
                 }
                 cameraShelf
                 Text(PaywallConfig.priceAnchorLine)
                     .font(OSFont.body(14))
-                    .foregroundStyle(OSColor.inkFaint)
+                    .foregroundStyle(OSColor.textSecondary)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 32)
                 planPicker
@@ -48,7 +48,7 @@ struct PaywallView: View {
             }
             .padding(.vertical, 24)
         }
-        .background(OSColor.cream.ignoresSafeArea())
+        .background(OSScreenBackground())
         .task { offering = await gate.service.offering(id: PaywallConfig.defaultOfferingID) }
         .onChange(of: scenePhase) { phase in
             // Backgrounding the app from a hard paywall counts as a leave attempt.
@@ -78,7 +78,7 @@ struct PaywallView: View {
                         VStack(spacing: 4) {
                             CameraBodyView(stock: stock)
                                 .frame(width: 84, height: 58)
-                            OSLabelText(text: stock.displayName, size: 10, color: OSColor.ink)
+                            OSLabelText(text: stock.displayName, size: 10, color: OSColor.textPrimary)
                         }
                     }
                 }
@@ -93,7 +93,7 @@ struct PaywallView: View {
                                     if !gate.isPro {
                                         Image(systemName: "lock.fill")
                                             .font(.system(size: 9))
-                                            .foregroundStyle(OSColor.inkFaint)
+                                            .foregroundStyle(OSColor.textSecondary)
                                             .padding(2)
                                     }
                                 }
@@ -139,13 +139,14 @@ struct PaywallView: View {
                     Text(price).font(OSFont.display(18))
                 }
                 OSLabelText(text: badge, size: 10, color: OSColor.accent)
-                Text(detail).font(OSFont.body(12)).foregroundStyle(OSColor.inkFaint)
+                Text(detail).font(OSFont.body(12)).foregroundStyle(OSColor.textSecondary)
             }
-            .foregroundStyle(OSColor.ink)
+            .foregroundStyle(OSColor.textPrimary)
             .padding(14)
-            .background(selected ? OSColor.creamDim : OSColor.cream)
-            .overlay(Rectangle().stroke(selected ? OSColor.accent : OSColor.ink.opacity(0.2),
-                                        lineWidth: selected ? 2 : 1))
+            .background(RoundedRectangle(cornerRadius: 20, style: .continuous)
+                .fill(selected ? OSColor.field : OSColor.surface))
+            .overlay(RoundedRectangle(cornerRadius: 20, style: .continuous)
+                .stroke(selected ? OSColor.accent : .clear, lineWidth: 2))
         }
         .accessibilityLabel("\(title), \(price). \(detail)")
         .accessibilityAddTraits(selected ? .isSelected : [])
@@ -158,7 +159,7 @@ struct PaywallView: View {
                 HStack(alignment: .top, spacing: 10) {
                     OSLabelText(text: item.day, size: 11, color: OSColor.accent)
                         .frame(width: 52, alignment: .leading)
-                    Text(item.text).font(OSFont.body(13)).foregroundStyle(OSColor.ink)
+                    Text(item.text).font(OSFont.body(13)).foregroundStyle(OSColor.textPrimary)
                 }
             }
         }
@@ -196,7 +197,7 @@ struct PaywallView: View {
             Link("Privacy", destination: AppConfig.privacyURL)
         }
         .font(OSFont.body(12))
-        .foregroundStyle(OSColor.inkFaint)
+        .foregroundStyle(OSColor.textSecondary)
     }
 
     private func restore() {
@@ -227,7 +228,7 @@ struct DownsellView: View {
             OSDisplayText(text: "The darkroom, forever.", size: 30)
             Text(PaywallConfig.downsellBody)
                 .font(OSFont.body(15))
-                .foregroundStyle(OSColor.inkFaint)
+                .foregroundStyle(OSColor.textSecondary)
                 .multilineTextAlignment(.center)
             OSDisplayText(text: livePrice ?? PaywallConfig.lifetimePriceText, size: 40, color: OSColor.accent)
             OSLabelText(text: "One payment · lifetime access · all future cameras", size: 11)
@@ -236,11 +237,11 @@ struct DownsellView: View {
                             enabled: !purchasing) { purchase() }
             Button("No thanks") { onFinished() }
                 .font(OSFont.label(13))
-                .foregroundStyle(OSColor.inkFaint)
+                .foregroundStyle(OSColor.textSecondary)
                 .padding(.bottom, 16)
         }
         .padding(24)
-        .background(OSColor.cream.ignoresSafeArea())
+        .background(OSScreenBackground())
         .task { offering = await gate.service.offering(id: PaywallConfig.downsellOfferingID) }
     }
 
@@ -270,15 +271,15 @@ struct LapsedBanner: View {
         } label: {
             HStack {
                 Image(systemName: "key.fill").font(.system(size: 12))
-                Text(PaywallConfig.lapsedBannerText.uppercased())
-                    .font(OSFont.label(12)).kerning(1.5)
+                Text(PaywallConfig.lapsedBannerText)
+                    .font(OSFont.label(14))
                 Spacer()
                 Image(systemName: "chevron.right").font(.system(size: 11))
             }
-            .foregroundStyle(OSColor.cream)
+            .foregroundStyle(OSColor.textPrimary)
             .padding(.horizontal, 16)
             .padding(.vertical, 10)
-            .background(OSColor.ink)
+            .background(OSColor.surface)
         }
         .accessibilityLabel("Restore full darkroom")
     }

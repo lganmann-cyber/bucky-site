@@ -23,7 +23,7 @@ struct LibraryView: View {
                 }
             }
         }
-        .background(OSColor.cream)
+        .background(OSScreenBackground())
         .navigationTitle("Rolls")
         .navigationDestination(for: UUID.self) { rollID in
             RollDetailView(rollID: rollID)
@@ -35,7 +35,7 @@ struct LibraryView: View {
             OSDisplayText(text: "No rolls yet", size: 24)
             Text("Shoot with a camera or develop photos from your library — every roll ends up here.")
                 .font(OSFont.body(15))
-                .foregroundStyle(OSColor.inkFaint)
+                .foregroundStyle(OSColor.textSecondary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 40)
         }
@@ -52,7 +52,7 @@ struct RollCard: View {
         HStack(spacing: 14) {
             coverThumb
                 .frame(width: 76, height: 76)
-                .clipped()
+                .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
 
             VStack(alignment: .leading, spacing: 4) {
                 OSDisplayText(text: roll.displayCameraName, size: 18)
@@ -64,8 +64,8 @@ struct RollCard: View {
             statusBadge
         }
         .padding(12)
-        .background(OSColor.creamDim)
-        .overlay(Rectangle().stroke(OSColor.ink.opacity(0.12), lineWidth: 1))
+        .background(RoundedRectangle(cornerRadius: 20, style: .continuous)
+            .fill(OSColor.surface))
         .accessibilityElement(children: .combine)
     }
 
@@ -80,7 +80,7 @@ struct RollCard: View {
             ZStack {
                 Rectangle().fill(Color(hex: 0x191813))
                 Image(systemName: "film")
-                    .foregroundStyle(OSColor.cream.opacity(0.4))
+                    .foregroundStyle(OSColor.textPrimary.opacity(0.4))
                     .font(.system(size: 26))
             }
         }
@@ -95,7 +95,7 @@ struct RollCard: View {
             LabTimerView(endsAt: endsAt, compact: true)
         case .developed:
             Image(systemName: "checkmark")
-                .foregroundStyle(OSColor.ink.opacity(0.5))
+                .foregroundStyle(OSColor.textPrimary.opacity(0.5))
         }
     }
 }
@@ -145,7 +145,7 @@ struct RollDetailView: View {
                 Color.clear.onAppear { dismiss() }
             }
         }
-        .background(OSColor.cream)
+        .background(OSScreenBackground())
         .navigationTitle(roll?.displayCameraName ?? "")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -225,7 +225,7 @@ struct RollDetailView: View {
                 if let idx = roll.shots.firstIndex(of: shot) {
                     Text("\(idx + 1)")
                         .font(OSFont.stamp(13))
-                        .foregroundStyle(OSColor.cream.opacity(0.25))
+                        .foregroundStyle(OSColor.textPrimary.opacity(0.25))
                 }
             }
         }
@@ -248,7 +248,7 @@ struct NotificationPromptView: View {
             OSDisplayText(text: "Want to know when your prints are ready?", size: 24)
             Text("Rolls take a moment in the lab. We'll send one quiet ping when each roll finishes developing — nothing else, ever.")
                 .font(OSFont.body(15))
-                .foregroundStyle(OSColor.inkFaint)
+                .foregroundStyle(OSColor.textSecondary)
                 .multilineTextAlignment(.center)
             OSPrimaryButton(title: "Notify me") {
                 Task {
@@ -258,11 +258,11 @@ struct NotificationPromptView: View {
             }
             Button("Not now") { dismiss() }
                 .font(OSFont.label(14))
-                .foregroundStyle(OSColor.inkFaint)
+                .foregroundStyle(OSColor.textSecondary)
         }
         .padding(28)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(OSColor.cream)
+        .background(OSScreenBackground())
     }
 }
 
@@ -284,14 +284,14 @@ struct PhotoViewer: View {
         VStack(spacing: 0) {
             HStack {
                 Button { dismiss() } label: {
-                    Image(systemName: "xmark").foregroundStyle(OSColor.cream)
+                    Image(systemName: "xmark").foregroundStyle(OSColor.textPrimary)
                         .frame(width: 44, height: 44)
                 }
                 .accessibilityLabel("Close")
                 Spacer()
                 if let shot = currentShot {
                     OSLabelText(text: "\(index + 1) / \(roll.shots.count) · \(FilmStockLibrary.stock(for: shot.cameraID).displayName)",
-                                size: 12, color: OSColor.cream.opacity(0.7))
+                                size: 12, color: OSColor.textPrimary.opacity(0.7))
                 }
                 Spacer()
                 Color.clear.frame(width: 44, height: 44)
@@ -375,7 +375,7 @@ struct PhotoViewer: View {
             }
             .accessibilityLabel("Delete photo")
         }
-        .foregroundStyle(OSColor.cream)
+        .foregroundStyle(OSColor.textPrimary)
         .padding(.vertical, 18)
     }
 }

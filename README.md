@@ -10,6 +10,12 @@ rolls that develop on a lab timer.
 Metal grain kernel (pure-CI procedural fallback), StoreKit 2 via RevenueCat,
 no backend, no accounts. All photos stay on device.
 
+**Design language** (`DesignSystem/Theme.swift`): Locket-style — near-black
+warm background with an amber glow rising from the bottom, SF Pro Rounded
+bold type in sentence case, full-width amber pill CTAs with dark labels and a
+trailing arrow, dark rounded cards/fields (continuous corners), gray pill
+disabled states. The app runs dark-mode only (`UIUserInterfaceStyle = Dark`).
+
 ## Building
 
 1. Open `OldSnap.xcodeproj` in **Xcode 16+**.

@@ -32,7 +32,7 @@ struct BulkReviewView: View {
                 footer
             }
         }
-        .background(OSColor.cream)
+        .background(OSScreenBackground())
         .navigationBarBackButtonHidden(true)
         .onAppear {
             if let roll { selected = Set(roll.shots.map(\.id)) }
@@ -72,7 +72,7 @@ struct BulkReviewView: View {
             .opacity(isSelected ? 1 : 0.35)
 
             Image(systemName: isSelected ? "checkmark.square.fill" : "square")
-                .foregroundStyle(isSelected ? OSColor.accent : OSColor.cream)
+                .foregroundStyle(isSelected ? OSColor.accent : OSColor.textPrimary)
                 .padding(4)
         }
         .onTapGesture { detailShot = shot }
@@ -90,7 +90,7 @@ struct BulkReviewView: View {
             }
             Button("Close without saving") { onDone() }
                 .font(OSFont.label(13))
-                .foregroundStyle(OSColor.inkFaint)
+                .foregroundStyle(OSColor.textSecondary)
         }
         .padding(16)
     }
@@ -174,7 +174,7 @@ struct ReviewDetailSheet: View {
         }
         .padding(.vertical, 20)
         .presentationDetents([.large])
-        .presentationBackground(OSColor.cream)
+        .presentationBackground(OSColor.bg)
         .confirmationDialog("Switch camera", isPresented: $showCameraSwitcher, titleVisibility: .visible) {
             ForEach(FilmStockLibrary.all) { stock in
                 if EntitlementGate.shared.canUse(camera: stock.id) {

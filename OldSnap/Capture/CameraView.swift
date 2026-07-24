@@ -35,7 +35,7 @@ struct CameraView: View {
             if let count = controller.countdown {
                 Text("\(count)")
                     .font(OSFont.stamp(90))
-                    .foregroundStyle(OSColor.cream)
+                    .foregroundStyle(OSColor.textPrimary)
                     .transition(.opacity)
             }
 
@@ -67,7 +67,7 @@ struct CameraView: View {
                 VStack(spacing: 10) {
                     Text("OldSnap needs the camera to shoot film.")
                         .font(OSFont.body(15))
-                        .foregroundStyle(OSColor.cream)
+                        .foregroundStyle(OSColor.textPrimary)
                         .multilineTextAlignment(.center)
                     OSSecondaryButton(title: "Open Settings") {
                         if let url = URL(string: UIApplication.openSettingsURLString) {
@@ -127,9 +127,9 @@ struct CameraView: View {
         Button(action: action) {
             Image(systemName: icon)
                 .font(.system(size: 17, weight: .semibold))
-                .foregroundStyle(OSColor.cream)
-                .frame(width: 40, height: 40)
-                .background(Color.black.opacity(0.25))
+                .foregroundStyle(OSColor.textPrimary)
+                .frame(width: 42, height: 42)
+                .background(Circle().fill(Color.black.opacity(0.3)))
         }
         .accessibilityLabel(label)
     }
@@ -141,10 +141,12 @@ struct CameraView: View {
             Text(String(format: "%02d", used))
                 .font(OSFont.stamp(18))
                 .foregroundStyle(OSColor.stampOrange)
-            OSLabelText(text: "of \(AppConfig.rollCapacity)", size: 8, color: OSColor.cream.opacity(0.6))
+            OSLabelText(text: "of \(AppConfig.rollCapacity)", size: 8, color: OSColor.textPrimary.opacity(0.6))
         }
-        .padding(6)
-        .background(Color.black.opacity(0.5))
+        .padding(.horizontal, 10)
+        .padding(.vertical, 6)
+        .background(RoundedRectangle(cornerRadius: 12, style: .continuous)
+            .fill(Color.black.opacity(0.5)))
         .accessibilityLabel("\(used) of \(AppConfig.rollCapacity) exposures used")
     }
 
@@ -157,7 +159,7 @@ struct CameraView: View {
                     Button {
                         store.sendToLab(rollID: roll.id)
                     } label: {
-                        OSLabelText(text: "End roll → lab", size: 11, color: OSColor.cream.opacity(0.8))
+                        OSLabelText(text: "End roll → lab", size: 11, color: OSColor.textPrimary.opacity(0.8))
                     }
                     .accessibilityLabel("End roll and send to lab")
                 }
@@ -183,7 +185,7 @@ struct CameraView: View {
             Circle()
                 .fill(Color(hex: stock.bodyStyle.accentHex))
                 .frame(width: 74, height: 74)
-                .overlay(Circle().stroke(OSColor.cream.opacity(0.7), lineWidth: 3).padding(5))
+                .overlay(Circle().stroke(OSColor.textPrimary.opacity(0.7), lineWidth: 3).padding(5))
         }
         .accessibilityLabel("Shutter")
     }
@@ -209,7 +211,7 @@ struct CameraView: View {
                                     if locked {
                                         Image(systemName: "lock.fill")
                                             .font(.system(size: 10))
-                                            .foregroundStyle(OSColor.cream)
+                                            .foregroundStyle(OSColor.textPrimary)
                                             .padding(3)
                                             .background(Color.black.opacity(0.5))
                                     }
@@ -219,7 +221,7 @@ struct CameraView: View {
                                         candidate.id == selectedCamera ? OSColor.accent : .clear,
                                         lineWidth: 2))
                             OSLabelText(text: "\(candidate.displayName) · \(candidate.eraTag)",
-                                        size: 8, color: OSColor.cream.opacity(0.75))
+                                        size: 8, color: OSColor.textPrimary.opacity(0.75))
                         }
                     }
                     .accessibilityLabel("\(candidate.displayName), \(candidate.eraTag)\(locked ? ", locked" : "")")
@@ -286,10 +288,10 @@ struct CameraView: View {
         VStack {
             Spacer()
             VStack(spacing: 8) {
-                OSDisplayText(text: "Shoot your first roll", size: 20, color: OSColor.cream)
+                OSDisplayText(text: "Shoot your first roll", size: 20, color: OSColor.textPrimary)
                 Text("36 exposures, then it goes to the lab. No previews — that's the point.")
                     .font(OSFont.body(13))
-                    .foregroundStyle(OSColor.cream.opacity(0.8))
+                    .foregroundStyle(OSColor.textPrimary.opacity(0.8))
                     .multilineTextAlignment(.center)
                 Button("Got it") { coachShown = true }
                     .font(OSFont.label(14))

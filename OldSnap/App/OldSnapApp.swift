@@ -104,7 +104,7 @@ struct DevelopTabView: View {
             OSDisplayText(text: "Develop from camera roll", size: 26)
             Text("Pick up to \(AppConfig.rollCapacity) photos — one roll — and run them through any camera.")
                 .font(OSFont.body(15))
-                .foregroundStyle(OSColor.inkFaint)
+                .foregroundStyle(OSColor.textSecondary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 40)
             OSPrimaryButton(title: "Choose photos") { showImport = true }
@@ -112,7 +112,7 @@ struct DevelopTabView: View {
             Spacer()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(OSColor.cream)
+        .background(OSScreenBackground())
         .fullScreenCover(isPresented: $showImport) {
             ImportFlowView()
         }

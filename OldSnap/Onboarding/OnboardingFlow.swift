@@ -29,7 +29,7 @@ struct OnboardingFlow: View {
             content
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .background(OSColor.cream.ignoresSafeArea())
+        .background(OSScreenBackground())
         .onAppear { Analytics.track(.onboardingStarted) }
     }
 
@@ -146,7 +146,8 @@ struct HookView: View {
                     .opacity(showDeveloped ? 1 : 0)
             }
             .frame(maxHeight: 420)
-            .clipped()
+            .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
+            .padding(.horizontal, 20)
             .onAppear {
                 guard !reduceMotion else { showDeveloped = true; return }
                 withAnimation(.easeInOut(duration: 2.2).repeatForever(autoreverses: true)
@@ -184,7 +185,7 @@ struct SocialProofView: View {
             }
             Text("Loved by people who miss how photos used to feel.")
                 .font(OSFont.body(17))
-                .foregroundStyle(OSColor.ink)
+                .foregroundStyle(OSColor.textPrimary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 40)
             Spacer()
@@ -239,7 +240,7 @@ struct PhotoCountView: View {
             // Their number, reflected back — the problem stated in their scale.
             Text("That's \(countText) memories that all look the same.")
                 .font(OSFont.body(16))
-                .foregroundStyle(OSColor.inkFaint)
+                .foregroundStyle(OSColor.textSecondary)
                 .padding(.horizontal, 40)
                 .multilineTextAlignment(.center)
 
@@ -300,8 +301,8 @@ struct AestheticTilesView: View {
                             Image(uiImage: SampleImageFactory.developed(camera: aesthetic.primaryCamera))
                                 .resizable().scaledToFill()
                                 .frame(height: 190)
-                                .clipped()
-                            OSLabelText(text: aesthetic.label, size: 11, color: OSColor.ink)
+                                .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+                            OSLabelText(text: aesthetic.label, size: 11, color: OSColor.textPrimary)
                         }
                     }
                     .accessibilityLabel(aesthetic.label)
@@ -325,7 +326,7 @@ struct RatingRequestView: View {
                 .padding(.horizontal, 28)
             Text("A rating keeps the lights on 🖤")
                 .font(OSFont.body(17))
-                .foregroundStyle(OSColor.ink)
+                .foregroundStyle(OSColor.textPrimary)
             Spacer()
             OSPrimaryButton(title: "Sure, I'll rate it") {
                 Analytics.track(.ratingPromptShown)
@@ -335,7 +336,7 @@ struct RatingRequestView: View {
             .padding(.horizontal, 24)
             Button("Maybe later") { onNext() }
                 .font(OSFont.label(13))
-                .foregroundStyle(OSColor.inkFaint)
+                .foregroundStyle(OSColor.textSecondary)
                 .padding(.bottom, 20)
         }
     }
@@ -351,21 +352,24 @@ struct CreatorCodeView: View {
                 .padding(.top, 60)
             TextField("Creator code", text: $code)
                 .textFieldStyle(.plain)
-                .font(OSFont.stamp(20))
+                .font(OSFont.display(18))
+                .foregroundStyle(OSColor.textPrimary)
+                .tint(OSColor.accent)
                 .multilineTextAlignment(.center)
                 .autocorrectionDisabled()
                 .textInputAutocapitalization(.characters)
-                .padding(14)
-                .background(OSColor.creamDim)
-                .overlay(Rectangle().stroke(OSColor.ink.opacity(0.2), lineWidth: 1))
-                .padding(.horizontal, 60)
+                .padding(.vertical, 17)
+                .padding(.horizontal, 18)
+                .background(RoundedRectangle(cornerRadius: 18, style: .continuous)
+                    .fill(OSColor.field))
+                .padding(.horizontal, 40)
             OSPrimaryButton(title: "Continue", enabled: !code.trimmingCharacters(in: .whitespaces).isEmpty) {
                 onNext(code.trimmingCharacters(in: .whitespaces))
             }
             .padding(.horizontal, 24)
             Button("Skip") { onNext(nil) }
                 .font(OSFont.label(15))
-                .foregroundStyle(OSColor.inkFaint)
+                .foregroundStyle(OSColor.textSecondary)
             Spacer()
         }
     }
@@ -390,11 +394,11 @@ struct ComputingView: View {
             Spacer()
             ForEach(lines.indices, id: \.self) { index in
                 HStack(spacing: 12) {
-                    Image(systemName: index < visibleLines ? "checkmark.square.fill" : "square")
-                        .foregroundStyle(index < visibleLines ? OSColor.accent : OSColor.inkFaint)
+                    Image(systemName: index < visibleLines ? "checkmark.circle.fill" : "circle")
+                        .foregroundStyle(index < visibleLines ? OSColor.accent : OSColor.textSecondary)
                     Text(lines[index])
                         .font(OSFont.body(17))
-                        .foregroundStyle(OSColor.ink)
+                        .foregroundStyle(OSColor.textPrimary)
                 }
                 .opacity(index <= visibleLines ? 1 : 0.3)
             }
@@ -455,31 +459,31 @@ struct ProfileCardView: View {
             OSDisplayText(text: profile.id, size: 38, color: OSColor.accent)
             Text(profile.tagline)
                 .font(OSFont.body(14))
-                .foregroundStyle(OSColor.inkFaint)
+                .foregroundStyle(OSColor.textSecondary)
             Image(uiImage: SampleImageFactory.developed(camera: profile.primaryCamera))
                 .resizable().scaledToFill()
                 .frame(height: 220)
-                .clipped()
+                .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
             HStack(spacing: 12) {
                 ForEach(profile.cameras) { camera in
                     let stock = FilmStockLibrary.stock(for: camera)
                     VStack(spacing: 4) {
                         CameraBodyView(stock: stock)
                             .frame(width: 72, height: 50)
-                        OSLabelText(text: stock.displayName, size: 9, color: OSColor.ink)
+                        OSLabelText(text: stock.displayName, size: 9, color: OSColor.textPrimary)
                     }
                 }
             }
-            OSLabelText(text: "oldsnap", size: 10, color: OSColor.inkFaint.opacity(0.6))
+            OSLabelText(text: "oldsnap", size: 10, color: OSColor.textSecondary.opacity(0.6))
         }
         .padding(20)
-        .background(OSColor.creamDim)
-        .overlay(Rectangle().stroke(OSColor.ink.opacity(0.2), lineWidth: 1))
+        .background(RoundedRectangle(cornerRadius: 24, style: .continuous)
+            .fill(OSColor.surface))
         .padding(.horizontal, 24)
     }
 
     private func share() {
-        let renderer = ImageRenderer(content: card.frame(width: 380).background(OSColor.cream))
+        let renderer = ImageRenderer(content: card.frame(width: 380).padding(20).background(OSColor.bg))
         renderer.scale = 3
         if let image = renderer.uiImage {
             shareImage = image

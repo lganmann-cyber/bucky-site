@@ -48,7 +48,7 @@ struct MagicMomentView: View {
                 .padding(.horizontal, 32)
             Text("Pick one photo — any photo. We'll develop it through your \(FilmStockLibrary.stock(for: profile.primaryCamera).displayName). Limited photo access is completely fine.")
                 .font(OSFont.body(15))
-                .foregroundStyle(OSColor.inkFaint)
+                .foregroundStyle(OSColor.textSecondary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 40)
             Spacer()

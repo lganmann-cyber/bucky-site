@@ -31,7 +31,7 @@ struct ImportFlowView: View {
                     BulkReviewView(rollID: rollID) { dismiss() }
                 }
             }
-            .background(OSColor.cream)
+            .background(OSScreenBackground())
         }
         .interactiveDismissDisabled(coordinator.isWorking)
     }
@@ -203,7 +203,7 @@ struct CameraChoiceView: View {
 
             ScrollView {
                 VStack(spacing: 10) {
-                    OSChoiceRow(title: "SHUFFLE",
+                    OSChoiceRow(title: "Shuffle",
                                 subtitle: "We assign an era-appropriate camera to each photo.") {
                         coordinator.startDevelop(camera: nil)
                     }
@@ -237,13 +237,13 @@ struct LabOrderProgressView: View {
             OSDisplayText(text: "Lab order in progress", size: 24)
             Text(progressLine)
                 .font(OSFont.stamp(16))
-                .foregroundStyle(OSColor.ink)
+                .foregroundStyle(OSColor.textPrimary)
             ProgressView(value: progressValue)
                 .tint(OSColor.accent)
                 .padding(.horizontal, 60)
             Text("Keep the app open for fastest developing — your order is safe either way.")
                 .font(OSFont.body(13))
-                .foregroundStyle(OSColor.inkFaint)
+                .foregroundStyle(OSColor.textSecondary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 40)
             Spacer()

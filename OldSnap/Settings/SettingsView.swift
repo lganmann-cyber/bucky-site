@@ -13,7 +13,7 @@ struct SettingsView: View {
             Section("Membership") {
                 if gate.isPro {
                     Label("OldSnap Pro active", systemImage: "checkmark.seal.fill")
-                        .foregroundStyle(OSColor.ink)
+                        .foregroundStyle(OSColor.textPrimary)
                 } else {
                     Button("Unlock all cameras") {
                         PaywallPresenter.shared.present(source: "settings")
@@ -55,7 +55,7 @@ struct SettingsView: View {
             #endif
         }
         .scrollContentBackground(.hidden)
-        .background(OSColor.cream)
+        .background(OSScreenBackground())
         .navigationTitle("Settings")
         .onAppear { storageBytes = store.storageBytesUsed() }
         .confirmationDialog("Clear cached originals?", isPresented: $showClearConfirm,

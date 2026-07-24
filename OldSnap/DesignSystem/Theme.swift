@@ -1,14 +1,25 @@
 import SwiftUI
 
-/// OldSnap visual identity: printed-cardstock surfaces, film-box typography,
-/// zero border radius everywhere. Skeuomorphism lives in camera mode only.
+/// OldSnap visual identity v2 — Locket-style: near-black surfaces with a
+/// warm glow, SF Pro Rounded bold type, big amber pill buttons with dark
+/// text, softly rounded dark cards. Friendly, warm, nocturnal.
 enum OSColor {
-    static let cream = Color(hex: 0xF2EDE2)   // warm cream surface
-    static let ink = Color(hex: 0x2B2A26)     // near-black ink
-    static let accent = Color(hex: 0xC75B39)  // faded film-box orange
-    static let creamDim = Color(hex: 0xE7E0D2)
-    static let inkFaint = Color(hex: 0x2B2A26).opacity(0.55)
-    static let stampOrange = Color(hex: 0xFF7A1A) // date-stamp burn orange
+    /// Near-black app background (warm, never pure black).
+    static let bg = Color(hex: 0x0E0D0B)
+    /// Elevated dark surface: cards, choice rows, banners.
+    static let surface = Color(hex: 0x1D1C19)
+    /// Input fields / pressed surfaces, one step lighter.
+    static let field = Color(hex: 0x262420)
+    /// Primary text: warm off-white.
+    static let textPrimary = Color(hex: 0xF5F3EF)
+    /// Secondary text ~55% white.
+    static let textSecondary = Color(hex: 0xF5F3EF).opacity(0.55)
+    /// The amber accent — buttons, highlights, selection.
+    static let accent = Color(hex: 0xFFC233)
+    /// Text/icons sitting on the amber accent.
+    static let onAccent = Color(hex: 0x201700)
+    /// Retro date-stamp / lab-timer orange (unchanged; it's in the photos).
+    static let stampOrange = Color(hex: 0xFF7A1A)
 }
 
 extension Color {
@@ -21,34 +32,48 @@ extension Color {
     }
 }
 
-/// Condensed uppercase display + letterspaced small caps, built on system
-/// fonts so no bundled font license is needed at v1. Swap for an Oswald-class
-/// face by changing these two functions.
+/// SF Pro Rounded everywhere — the friendly, bold look. No custom font
+/// licenses needed; `design: .rounded` is the exact face in the reference.
 enum OSFont {
     static func display(_ size: CGFloat) -> Font {
-        .system(size: size, weight: .heavy, design: .default).width(.condensed)
+        .system(size: size, weight: .bold, design: .rounded)
     }
     static func label(_ size: CGFloat) -> Font {
-        .system(size: size, weight: .semibold, design: .default)
+        .system(size: size, weight: .semibold, design: .rounded)
     }
     static func body(_ size: CGFloat) -> Font {
-        .system(size: size, weight: .regular, design: .default)
+        .system(size: size, weight: .regular, design: .rounded)
     }
-    /// 7-segment-adjacent look for date stamps and lab timers.
+    /// Digit face for date stamps and lab timers.
     static func stamp(_ size: CGFloat) -> Font {
         .system(size: size, weight: .bold, design: .monospaced)
     }
 }
 
+/// The screen backdrop: warm black with a faint amber glow rising from the
+/// bottom, like the reference onboarding.
+struct OSScreenBackground: View {
+    var body: some View {
+        ZStack {
+            OSColor.bg
+            RadialGradient(
+                colors: [OSColor.accent.opacity(0.14), .clear],
+                center: .init(x: 0.5, y: 1.05),
+                startRadius: 0, endRadius: 480)
+        }
+        .ignoresSafeArea()
+    }
+}
+
+/// Big bold sentence-case headline (SF Rounded), centered.
 struct OSDisplayText: View {
     let text: String
     var size: CGFloat = 28
-    var color: Color = OSColor.ink
+    var color: Color = OSColor.textPrimary
 
     var body: some View {
-        Text(text.uppercased())
+        Text(text)
             .font(OSFont.display(size))
-            .kerning(0.5)
             .foregroundStyle(color)
             .multilineTextAlignment(.center)
             .fixedSize(horizontal: false, vertical: true)
@@ -57,58 +82,64 @@ struct OSDisplayText: View {
 
 struct OSLabelText: View {
     let text: String
-    var size: CGFloat = 12
-    var color: Color = OSColor.inkFaint
+    var size: CGFloat = 13
+    var color: Color = OSColor.textSecondary
 
     var body: some View {
-        Text(text.uppercased())
+        Text(text)
             .font(OSFont.label(size))
-            .kerning(2)
             .foregroundStyle(color)
     }
 }
 
-/// Primary action: a flat, sharp-cornered slab of accent orange.
+/// Primary CTA: full-width amber pill, bold dark label, trailing arrow.
+/// Disabled state is the gray pill from the reference.
 struct OSPrimaryButton: View {
     let title: String
     var enabled: Bool = true
+    var showsArrow: Bool = true
     let action: () -> Void
 
     var body: some View {
         Button(action: action) {
-            Text(title.uppercased())
-                .font(OSFont.display(18))
-                .kerning(1)
-                .foregroundStyle(OSColor.cream)
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 16)
-                .background(enabled ? OSColor.accent : OSColor.inkFaint)
+            HStack(spacing: 8) {
+                Text(title)
+                    .font(OSFont.display(19))
+                if showsArrow {
+                    Image(systemName: "arrow.right")
+                        .font(.system(size: 17, weight: .bold))
+                }
+            }
+            .foregroundStyle(enabled ? OSColor.onAccent : OSColor.textPrimary.opacity(0.35))
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 17)
+            .background(
+                Capsule().fill(enabled ? OSColor.accent : OSColor.surface))
         }
         .disabled(!enabled)
         .accessibilityLabel(Text(title))
     }
 }
 
+/// Secondary action: dark gray pill, white label.
 struct OSSecondaryButton: View {
     let title: String
     let action: () -> Void
 
     var body: some View {
         Button(action: action) {
-            Text(title.uppercased())
-                .font(OSFont.label(14))
-                .kerning(1.5)
-                .foregroundStyle(OSColor.ink)
+            Text(title)
+                .font(OSFont.display(16))
+                .foregroundStyle(OSColor.textPrimary)
                 .frame(maxWidth: .infinity)
-                .padding(.vertical, 14)
-                .background(OSColor.cream)
-                .overlay(Rectangle().stroke(OSColor.ink, lineWidth: 1.5))
+                .padding(.vertical, 15)
+                .background(Capsule().fill(OSColor.surface))
         }
         .accessibilityLabel(Text(title))
     }
 }
 
-/// A tappable intake option rendered like a line on a printed order form.
+/// A tappable intake option: rounded dark card, bold white title.
 struct OSChoiceRow: View {
     let title: String
     var subtitle: String? = nil
@@ -118,25 +149,44 @@ struct OSChoiceRow: View {
         Button(action: action) {
             VStack(alignment: .leading, spacing: 4) {
                 Text(title)
-                    .font(OSFont.display(18))
-                    .foregroundStyle(OSColor.ink)
+                    .font(OSFont.display(17))
+                    .foregroundStyle(OSColor.textPrimary)
                 if let subtitle {
                     Text(subtitle)
                         .font(OSFont.body(14))
-                        .foregroundStyle(OSColor.inkFaint)
+                        .foregroundStyle(OSColor.textSecondary)
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(16)
-            .background(OSColor.creamDim)
-            .overlay(Rectangle().stroke(OSColor.ink.opacity(0.15), lineWidth: 1))
+            .padding(.horizontal, 20)
+            .padding(.vertical, 16)
+            .background(RoundedRectangle(cornerRadius: 18, style: .continuous)
+                .fill(OSColor.surface))
         }
         .accessibilityElement(children: .combine)
     }
 }
 
-/// Progress indicator styled as 35mm film perforations advancing along the top.
-/// Filled sprocket holes mark completed steps.
+/// Rounded circular back/utility chip (dark gray), as in the reference.
+struct OSCircleButton: View {
+    let systemImage: String
+    let label: String
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            Image(systemName: systemImage)
+                .font(.system(size: 16, weight: .semibold))
+                .foregroundStyle(OSColor.textPrimary)
+                .frame(width: 42, height: 42)
+                .background(Circle().fill(OSColor.surface))
+        }
+        .accessibilityLabel(label)
+    }
+}
+
+/// Progress indicator: film sprocket holes, now soft rounded dots — amber
+/// when filled, faint white when not.
 struct FilmPerforationProgress: View {
     let progress: Double // 0...1
 
@@ -148,13 +198,13 @@ struct FilmPerforationProgress: View {
             HStack(spacing: spacing) {
                 ForEach(0..<holeCount, id: \.self) { i in
                     let filled = Double(i) / Double(holeCount - 1) <= progress
-                    Rectangle()
-                        .fill(filled ? OSColor.accent : OSColor.ink.opacity(0.15))
-                        .frame(width: holeWidth, height: 14)
+                    RoundedRectangle(cornerRadius: 3, style: .continuous)
+                        .fill(filled ? OSColor.accent : OSColor.textPrimary.opacity(0.14))
+                        .frame(width: holeWidth, height: 12)
                 }
             }
         }
-        .frame(height: 14)
+        .frame(height: 12)
         .accessibilityElement()
         .accessibilityLabel("Progress")
         .accessibilityValue("\(Int(progress * 100)) percent")

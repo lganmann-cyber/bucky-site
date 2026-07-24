@@ -47,13 +47,13 @@ struct PresetComparisonView: View {
                 } else {
                     Text("Pick a source photo to render the full preset grid.")
                         .font(OSFont.body(15))
-                        .foregroundStyle(OSColor.inkFaint)
+                        .foregroundStyle(OSColor.textSecondary)
                         .padding(.top, 60)
                 }
             }
             .padding(.vertical)
         }
-        .background(OSColor.cream)
+        .background(OSScreenBackground())
         .navigationTitle("Preset Grid")
         .onChange(of: pickerItem) { item in
             guard let item else { return }
@@ -88,10 +88,10 @@ struct PresetComparisonView: View {
             }
             let stock = FilmStockLibrary.stock(for: id)
             OSDisplayText(text: stock.displayName, size: 22)
-            Text(stock.tagline).font(OSFont.body(14)).foregroundStyle(OSColor.inkFaint)
+            Text(stock.tagline).font(OSFont.body(14)).foregroundStyle(OSColor.textSecondary)
         }
         .padding()
-        .presentationBackground(OSColor.cream)
+        .presentationBackground(OSColor.bg)
     }
 
     private func renderAll() {
