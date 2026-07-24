@@ -1,0 +1,41 @@
+name: iOS build
+
+on:
+  push:
+    branches: [claude/oldsnap-ios-app-gvqi0m]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build OldSnap (iOS Simulator, unsigned)
+    runs-on: macos-15
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Show Xcode version
+        run: xcodebuild -version
+
+      - name: Build
+        run: |
+          set -o pipefail
+          xcodebuild \
+            -project OldSnap.xcodeproj \
+            -scheme OldSnap \
+            -destination 'generic/platform=iOS Simulator' \
+            -skipPackagePluginValidation \
+            CODE_SIGNING_ALLOWED=NO \
+            build 2>&1 | tee build.log
+
+      - name: Surface errors
+        if: failure()
+        run: |
+          echo "=== Compiler errors ==="
+          grep -E 'error:' build.log | sort -u || true
+
+      - name: Upload build log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-log
+          path: build.log
