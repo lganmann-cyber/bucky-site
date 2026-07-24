@@ -8,8 +8,8 @@ actor DevelopQueue {
     /// Renders a batch sequentially, reporting each completion to the store.
     func enqueue(rollID: UUID, shots: [Shot], store: RollStore) async {
         for shot in shots {
-            let watermark = await !EntitlementGate.shared.canUseWithoutWatermark(camera: shot.cameraID)
-            await renderNow(rollID: rollID, shot: shot, store: store, watermark: watermark)
+            let clean = await EntitlementGate.shared.canUseWithoutWatermark(camera: shot.cameraID)
+            await renderNow(rollID: rollID, shot: shot, store: store, watermark: !clean)
         }
         // Half-frame rolls pair up after every half is rendered.
         await composeDiptychsIfNeeded(rollID: rollID, store: store)

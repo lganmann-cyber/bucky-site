@@ -22,10 +22,7 @@ final class RollStore: ObservableObject {
 
     // MARK: - Paths
 
-    private nonisolated var documentsURL: URL {
-        FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-    }
-    private nonisolated var rollsRootURL: URL { documentsURL.appendingPathComponent("Rolls", isDirectory: true) }
+    private nonisolated var rollsRootURL: URL { RollFiles.rootURL }
     private var indexURL: URL {
         let support = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
         try? FileManager.default.createDirectory(at: support, withIntermediateDirectories: true)
@@ -33,10 +30,10 @@ final class RollStore: ObservableObject {
     }
 
     nonisolated func originalURL(roll: UUID, shot: UUID) -> URL {
-        rollsRootURL.appendingPathComponent("\(roll.uuidString)/\(shot.uuidString)-original.jpg")
+        RollFiles.originalURL(roll: roll, shot: shot)
     }
     nonisolated func developedURL(roll: UUID, shot: UUID) -> URL {
-        rollsRootURL.appendingPathComponent("\(roll.uuidString)/\(shot.uuidString)-developed.jpg")
+        RollFiles.developedURL(roll: roll, shot: shot)
     }
 
     private init() {

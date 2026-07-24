@@ -31,6 +31,21 @@ struct Shot: Codable, Identifiable, Equatable {
     }
 }
 
+/// Path scheme for roll images. Nonisolated on purpose: background queues,
+/// export code, and the main-actor store all derive identical paths from here.
+enum RollFiles {
+    static var rootURL: URL {
+        FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("Rolls", isDirectory: true)
+    }
+    static func originalURL(roll: UUID, shot: UUID) -> URL {
+        rootURL.appendingPathComponent("\(roll.uuidString)/\(shot.uuidString)-original.jpg")
+    }
+    static func developedURL(roll: UUID, shot: UUID) -> URL {
+        rootURL.appendingPathComponent("\(roll.uuidString)/\(shot.uuidString)-developed.jpg")
+    }
+}
+
 enum RollState: Codable, Equatable {
     case active                    // still accepting shots
     case developing(endsAt: Date)  // in the lab — 30s timer running

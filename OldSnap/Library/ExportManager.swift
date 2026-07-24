@@ -10,7 +10,6 @@ enum ExportManager {
     /// original's EXIF/metadata dictionary.
     static func saveToPhotos(rollID: UUID, shot: Shot, format: Format = .jpeg,
                              completion: @escaping (Bool) -> Void) {
-        let store = RollStore.shared
         DispatchQueue.global(qos: .userInitiated).async {
             guard let data = exportData(rollID: rollID, shot: shot, format: format) else {
                 DispatchQueue.main.async { completion(false) }
@@ -25,18 +24,17 @@ enum ExportManager {
                     completion(success)
                 }
             }
-            _ = store // keep the singleton referenced explicitly
         }
     }
 
     /// Developed image data with the original's metadata merged in.
+    /// Uses `RollFiles` directly so it's callable from any queue.
     static func exportData(rollID: UUID, shot: Shot, format: Format) -> Data? {
-        let store = RollStore.shared
-        let developedURL = store.developedURL(roll: rollID, shot: shot.id)
+        let developedURL = RollFiles.developedURL(roll: rollID, shot: shot.id)
         guard let developed = try? Data(contentsOf: developedURL) else { return nil }
 
         // Pull EXIF from the sandbox original; if it's gone, ship as-is.
-        let originalURL = store.originalURL(roll: rollID, shot: shot.id)
+        let originalURL = RollFiles.originalURL(roll: rollID, shot: shot.id)
         guard let originalSource = CGImageSourceCreateWithURL(originalURL as CFURL, nil),
               let metadata = CGImageSourceCopyPropertiesAtIndex(originalSource, 0, nil),
               let developedSource = CGImageSourceCreateWithData(developed as CFData, nil)

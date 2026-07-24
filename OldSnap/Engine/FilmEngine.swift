@@ -408,7 +408,7 @@ final class FilmEngine {
 
         if let kernel = grainKernel {
             let args: [Any] = [
-                Float(bitPattern: UInt32(truncatingIfNeeded: seed)),
+                Float(seed % 65_536), // compact float seed; full seed range not needed for decorrelation
                 Float(params.intensity),
                 Float(grainPixels),
                 Float(params.chromaMix),

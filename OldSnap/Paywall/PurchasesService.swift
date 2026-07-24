@@ -14,7 +14,7 @@ struct PaywallProduct: Identifiable {
     let detailText: String
     let hasTrial: Bool
     #if canImport(RevenueCat)
-    var package: Package?
+    var package: Package? = nil
     #endif
 }
 
