@@ -88,8 +88,8 @@ enum FrameRenderer {
             // The gutter is unexposed film: near-black with a warm cast.
             UIColor(red: 0.07, green: 0.06, blue: 0.05, alpha: 1).setFill()
             ctx.fill(CGRect(origin: .zero, size: size))
-            drawFilling(left, into: CGRect(x: 0, y: 0, width: halfWidth, height: halfHeight), context: ctx.cgContext)
-            drawFilling(right, into: CGRect(x: halfWidth + gutter, y: 0, width: halfWidth, height: halfHeight), context: ctx.cgContext)
+            drawFilling(l, into: CGRect(x: 0, y: 0, width: halfWidth, height: halfHeight), context: ctx.cgContext)
+            drawFilling(r, into: CGRect(x: halfWidth + gutter, y: 0, width: halfWidth, height: halfHeight), context: ctx.cgContext)
         }
     }
 

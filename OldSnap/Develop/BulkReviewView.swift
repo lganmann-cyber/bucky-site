@@ -173,8 +173,9 @@ struct ReviewDetailSheet: View {
             }
         }
         .padding(.vertical, 20)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(OSColor.bg.ignoresSafeArea()) // presentationBackground needs iOS 16.4; target is 16.0
         .presentationDetents([.large])
-        .presentationBackground(OSColor.bg)
         .confirmationDialog("Switch camera", isPresented: $showCameraSwitcher, titleVisibility: .visible) {
             ForEach(FilmStockLibrary.all) { stock in
                 if EntitlementGate.shared.canUse(camera: stock.id) {

@@ -91,7 +91,8 @@ struct PresetComparisonView: View {
             Text(stock.tagline).font(OSFont.body(14)).foregroundStyle(OSColor.textSecondary)
         }
         .padding()
-        .presentationBackground(OSColor.bg)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(OSColor.bg.ignoresSafeArea()) // presentationBackground needs iOS 16.4; target is 16.0
     }
 
     private func renderAll() {
