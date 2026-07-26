@@ -425,6 +425,9 @@ final class FilmEngine {
     /// Pure Core Image grain: CIRandomGenerator (procedural white noise),
     /// jittered by seed, scaled to grain size, partially desaturated, then
     /// overlay-composited with a luminance-weighted mask.
+    ///
+    /// Scaling uses nearest-neighbor + a fractional clump blur. Never Lanczos:
+    /// smooth-resampling noise turns every grain into a soft circular blob.
     private func grainFallback(image: CIImage, params: GrainParams, seed: UInt64,
                                grainPixels: CGFloat, quality: Quality) -> CIImage {
         let extent = image.extent
@@ -435,9 +438,18 @@ final class FilmEngine {
         var noise = CIImage(color: .gray).cropped(to: extent)
         if let random = CIFilter(name: "CIRandomGenerator")?.outputImage {
             noise = random
-                .transformed(by: jitter)
-                .osResampled(scale: grainPixels)
+                .samplingNearest()
+                .transformed(by: CGAffineTransform(scaleX: grainPixels, y: grainPixels)
+                    .concatenating(jitter))
                 .cropped(to: extent)
+            // Soften clump edges just enough to kill pixel squares without
+            // rounding the grain into dots.
+            if grainPixels > 1.2, quality == .full {
+                noise = noise.clampedToExtent()
+                    .applyingFilter("CIGaussianBlur",
+                                    parameters: [kCIInputRadiusKey: grainPixels * 0.25])
+                    .cropped(to: extent)
+            }
         }
 
         // Pull toward luma-only grain per chromaMix, then center on 0.5 for

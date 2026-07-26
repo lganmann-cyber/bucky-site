@@ -31,7 +31,7 @@ enum FilmStockLibrary {
         s.color.highlightTint = RGB(r: 0.03, g: 0.015, b: 0)   // flash-warm highlights
         s.color.blackLift = 0.02
         s.color.highlightRolloff = 0.65
-        s.grain = GrainParams(intensity: 0.22, size: 2.2, chromaMix: 0.18, shadowWeight: 0.70)
+        s.grain = GrainParams(intensity: 0.22, size: 0.8, chromaMix: 0.18, shadowWeight: 0.70)
         s.bloom = 1.2
         s.vignette = VignetteParams(strength: 0.9, radius: 1.5)
         s.chromaticAberration = 0.35
@@ -61,7 +61,7 @@ enum FilmStockLibrary {
         s.color.highlightTint = RGB(r: 0.035, g: 0.025, b: 0) // golden highlights
         s.color.blackLift = 0.035
         s.color.highlightRolloff = 0.8
-        s.grain = GrainParams(intensity: 0.10, size: 1.4, chromaMix: 0.12, shadowWeight: 0.6)
+        s.grain = GrainParams(intensity: 0.10, size: 0.5, chromaMix: 0.12, shadowWeight: 0.6)
         s.bloom = 0.8
         s.vignette = VignetteParams(strength: 0.35, radius: 1.8)
         s.chromaticAberration = 0.12
@@ -86,7 +86,7 @@ enum FilmStockLibrary {
         s.color.highlightTint = RGB(r: 0.03, g: 0.022, b: 0.005) // cream highlights
         s.color.blackLift = 0.10
         s.color.highlightRolloff = 0.9
-        s.grain = GrainParams(intensity: 0.06, size: 2.6, chromaMix: 0.25, shadowWeight: 0.4)
+        s.grain = GrainParams(intensity: 0.06, size: 0.9, chromaMix: 0.25, shadowWeight: 0.4)
         s.bloom = 2.2
         s.vignette = VignetteParams(strength: 0.5, radius: 1.7)
         s.frame = .instantWhite
@@ -113,7 +113,7 @@ enum FilmStockLibrary {
         s.color.highlightTint = RGB(r: 0.02, g: 0.008, b: -0.004)
         s.color.blackLift = 0.0
         s.color.highlightRolloff = 0.35 // slides clip harder than neg
-        s.grain = GrainParams(intensity: 0.07, size: 1.1, chromaMix: 0.05, shadowWeight: 0.5)
+        s.grain = GrainParams(intensity: 0.07, size: 0.4, chromaMix: 0.05, shadowWeight: 0.5)
         s.vignette = VignetteParams(strength: 0.25, radius: 1.9)
         s.sharpen = 0.35
         s.variance = VarianceParams(exposureJitter: 0.06, temperatureJitter: 0.02, grainJitter: 0.1)
@@ -136,7 +136,7 @@ enum FilmStockLibrary {
         s.color.highlightTint = RGB(r: 0.04, g: 0.02, b: -0.01) // warm practicals
         s.color.blackLift = 0.045
         s.color.highlightRolloff = 0.75
-        s.grain = GrainParams(intensity: 0.15, size: 1.8, chromaMix: 0.2, shadowWeight: 0.65)
+        s.grain = GrainParams(intensity: 0.15, size: 0.65, chromaMix: 0.2, shadowWeight: 0.65)
         s.halation = HalationParams(threshold: 0.72, radius: 22,
                                     tint: RGB(r: 1.0, g: 0.30, b: 0.10), intensity: 0.85)
         s.bloom = 1.0
@@ -160,7 +160,7 @@ enum FilmStockLibrary {
         s.color.highlightRolloff = 0.05 // digital clip — highlights just die
         s.color.blackLift = 0.01
         // CCD shadow noise is chroma-heavy and fine-grained.
-        s.grain = GrainParams(intensity: 0.09, size: 1.0, chromaMix: 0.7, shadowWeight: 0.9)
+        s.grain = GrainParams(intensity: 0.09, size: 0.35, chromaMix: 0.7, shadowWeight: 0.9)
         s.chromaticAberration = 0.6
         s.resolutionCrush = 0.42
         s.sharpen = 0.7 // in-camera oversharpening halos
@@ -183,7 +183,7 @@ enum FilmStockLibrary {
         s.color.curveR = punch; s.color.curveG = punch; s.color.curveB = punch
         s.color.blackLift = 0.0
         s.color.highlightRolloff = 0.85
-        s.grain = GrainParams(intensity: 0.18, size: 2.0, chromaMix: 0.0, shadowWeight: 0.55)
+        s.grain = GrainParams(intensity: 0.18, size: 0.7, chromaMix: 0.0, shadowWeight: 0.55)
         s.vignette = VignetteParams(strength: 0.35, radius: 1.8)
         s.sharpen = 0.2
         s.variance = VarianceParams(exposureJitter: 0.10, temperatureJitter: 0, grainJitter: 0.2)
@@ -205,7 +205,7 @@ enum FilmStockLibrary {
         s.color.shadowTint = RGB(r: 0.01, g: 0.01, b: -0.01)
         s.color.blackLift = 0.03
         s.color.highlightRolloff = 0.6
-        s.grain = GrainParams(intensity: 0.13, size: 1.9, chromaMix: 0.2, shadowWeight: 0.6)
+        s.grain = GrainParams(intensity: 0.13, size: 0.7, chromaMix: 0.2, shadowWeight: 0.6)
         s.bloom = 1.8 // plastic meniscus lens
         s.vignette = VignetteParams(strength: 1.6, radius: 1.25)
         s.chromaticAberration = 0.45
@@ -233,7 +233,7 @@ enum FilmStockLibrary {
         s.color.blackLift = 0.03
         s.color.highlightRolloff = 0.7
         // Half the negative area → grain reads ~40% larger than full frame.
-        s.grain = GrainParams(intensity: 0.16, size: 2.0, chromaMix: 0.15, shadowWeight: 0.6)
+        s.grain = GrainParams(intensity: 0.16, size: 0.75, chromaMix: 0.15, shadowWeight: 0.6)
         s.bloom = 1.0
         s.vignette = VignetteParams(strength: 0.5, radius: 1.6)
         s.frame = .halfFrameDiptych
@@ -256,7 +256,7 @@ enum FilmStockLibrary {
         s.color.shadowTint = RGB(r: 0.008, g: 0.006, b: 0)
         s.color.blackLift = 0.05
         s.color.highlightRolloff = 0.8
-        s.grain = GrainParams(intensity: 0.20, size: 2.6, chromaMix: 0.22, shadowWeight: 0.55)
+        s.grain = GrainParams(intensity: 0.20, size: 0.95, chromaMix: 0.22, shadowWeight: 0.55)
         s.bloom = 2.4 // fixed-focus lens + hand shake on a light body
         s.vignette = VignetteParams(strength: 0.6, radius: 1.6)
         s.resolutionCrush = 0.6

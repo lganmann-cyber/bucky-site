@@ -18,10 +18,15 @@
 
 - Desaturation *before* grain in the pipeline → grain stays luma naturally
 - Contrast: symmetric punch curve [0, .19, .5, .81, 1], `gamma 1.05`
-- Grain: `intensity 0.18, size 2.0, chromaMix 0.0, shadowWeight 0.55`
+- Grain: `intensity 0.18, size 0.7, chromaMix 0.0, shadowWeight 0.55`
 - Shoulder: `highlightRolloff 0.85`
 
 ## Iteration log
 
 - v1: shadowWeight 0.8 left highlights suspiciously clean — real scans show
   grain in bright walls too → 0.55.
+- v3 (device test): every stock's grain size was ~3x too coarse — 2‰-class
+  clumps render ~9 px wide on 12 MP and read as circular blobs, amplified
+  by Lanczos-upscaled noise in the CI fallback. All sizes recalibrated to
+  0.35–0.95‰ and the fallback now scales noise nearest-neighbor with a
+  0.25x clump blur.

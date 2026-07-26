@@ -23,10 +23,15 @@ community scans, family slide-carousel digitizations.
   so already-vivid reds still lead)
 - Inky shadows: `blackLift 0`, deep curve toes, faint blue shadow tint
 - Slide clipping: `highlightRolloff 0.35` (lowest among the film stocks)
-- Fine grain: `intensity 0.07, size 1.1, chromaMix 0.05`
+- Fine grain: `intensity 0.07, size 0.4, chromaMix 0.05`
 - Scan crispness: `sharpen 0.35`
 
 ## Iteration log
 
 - v1: saturation 1.3 went postcard-fake → 1.16 with gamma 1.06 gets density
   from contrast instead of chroma.
+- v3 (device test): every stock's grain size was ~3x too coarse — 2‰-class
+  clumps render ~9 px wide on 12 MP and read as circular blobs, amplified
+  by Lanczos-upscaled noise in the CI fallback. All sizes recalibrated to
+  0.35–0.95‰ and the fallback now scales noise nearest-neighbor with a
+  0.25x clump blur.
